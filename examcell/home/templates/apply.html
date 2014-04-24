@@ -1,0 +1,116 @@
+<ul class="nav nav-tabs" id="tabmenu">
+  <li class="active"><a href="#apply">Apply</a></li>
+  <li><a href="#challan">Challan</a></li>
+  <li><a href="#status">Status</a></li>
+  <li><a href="#hallticket">Hallticket</a></li>
+</ul>
+<div class="tab-content container">
+  <div class="tab-pane active" id="apply">
+  	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="rollnumber" class="col-sm-2">Roll Number</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="rollnumber" placeholder="Enter Roll Number" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="rollnumber" class="col-sm-2">Branch</label>
+			<div class="col-sm-6">
+				<select class="form-control">
+					<option>- Branch -</option>
+					<option>II - SEM</option>
+					<option>III - SEM</option>
+					<option>IV - SEM</option>
+					<option>V - SEM</option>
+					<option>VI - SEM</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2">Semester</label>
+			<div class="col-sm-6">
+				<select class="form-control">
+					<option>- SEM -</option>
+					<option>II - SEM</option>
+					<option>III - SEM</option>
+					<option>IV - SEM</option>
+					<option>V - SEM</option>
+					<option>VI - SEM</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2">
+				<div class="radio">
+					<label>
+						<input type="radio" name="optionsRadios" id="optionsRadios1" value="regular" checked>
+						Regular
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="optionsRadios" id="optionsRadios2" value="supplementary">
+						Suplementary
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="optionsRadios" id="optionsRadios2" value="betterment">
+						Betterment
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="rollnumber" class="col-sm-2">Amount</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="rollnumber" placeholder="Amount" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2">
+				<button class="btn btn-primary" id="apply-button">Apply</button>
+				<button class="btn btn-danger">Reset</button>
+			</div>
+		</div>
+  	</form>
+  </div>
+  <div class="tab-pane" id="challan">
+		<h3>Challan Generated</h3>
+		<ul class="nav nav-default">
+			<li><input type="checkbox" /> xxxxxxxxxxx</li>
+			<li><input type="checkbox" /> xxxxxxxxxxx</li>
+			<li><input type="checkbox" /> xxxxxxxxxxx</li>
+		</ul>
+		<button class="btn btn-primary">Download Challan</button>
+  </div>
+  <div class="tab-pane" id="status">
+		<h3>Verification Status</h3>
+		<p>Applied<span class="glyphicon glyphicon-ok"></span></p>
+		<p>Fees Paid<span class="glyphicon glyphicon-ok"></span></p>
+		<p>Verified<span class="glyphicon glyphicon-ok"></span></p>
+  </div>
+  <div class="tab-pane" id="hallticket">
+  		<h3>Hallticket Generated</h3>
+		<ul class="nav nav-default">
+			<li><input type="checkbox" /> xxxxxxxxxxx</li>
+			<li><input type="checkbox" /> xxxxxxxxxxx</li>
+			<li><input type="checkbox" /> xxxxxxxxxxx</li>
+		</ul>
+		<button class="btn btn-primary">Download Hallticket</button>
+  </div>
+</div>
+<script>
+$('#tabmenu a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+$("#apply-button").unbind();
+$("#apply-button").click(function(event){
+	event.preventDefault();
+	$("input[type='text']").each(function(index,value){
+		alert($(value).val());
+	});
+});
+</script>
