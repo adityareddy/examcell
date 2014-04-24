@@ -109,8 +109,12 @@ $('#tabmenu a').click(function (e) {
 $("#apply-button").unbind();
 $("#apply-button").click(function(event){
 	event.preventDefault();
-	$("input[type='text']").each(function(index,value){
-		alert($(value).val());
+	var obj=[];
+	$("input[type='text'],select").each(function(index,value){
+		console.log(index);
+		console.log($(value).val());
+		obj[index]=$(value).val();
 	});
+	alert(JSON.stringify(obj));
 });
 </script>
