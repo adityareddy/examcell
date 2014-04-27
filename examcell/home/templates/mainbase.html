@@ -27,7 +27,7 @@
 				<ul class="nav navbar-nav">
 					{% if user.is_authenticated %}
 						{% if user.is_staff %}
-						<li><p class="navbar-text">{{ user.groups }}</p></li>
+						<li><p class="navbar-text">{{ group }}</p></li>
 						{% else %}
 						<li><a href="apply" >Apply</a></li>
 						{% endif %}
