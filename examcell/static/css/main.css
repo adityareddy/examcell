@@ -8,3 +8,8 @@ html, body {
 .tab-content {
 	padding-top:10px;
 }
+
+.input-row-hover .form-control:hover{
+	/*background-color:rgba(100,0,0,1);*/
+	box-shadow:3px 3px 10px rgba(0,0,0,.25);
+}

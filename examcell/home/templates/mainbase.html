@@ -34,7 +34,7 @@
 						<li><a href="#">Settings</a></li>
 						<li><p class="navbar-text">Hi {{ user.username }}! <a href="/accounts/logout" class="navbar-link">Logout</a></p></li>
 					{% else %}
-						<li><a href="/accounts/register">Register</a></li>
+						<li><p class="navbar-text">Are you a student? <a href="/accounts/register" class="navbar-link">Register</a><p></li>
 						<li><p class="navbar-text">Already registered? <a href="/accounts/login" class="navbar-link">Login.</a></p></li>
 					{% endif %}
 				</ul>
