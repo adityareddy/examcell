@@ -4,6 +4,7 @@ from django.core.context_processors import csrf
 from student.models import Student
 from django.http.response import HttpResponseRedirect, HttpResponse
 from django.forms.models import ModelForm
+from django.contrib.auth.models import Group, User
 
 @login_required
 def home(request):
@@ -11,15 +12,14 @@ def home(request):
 	if group == 'Student':
 		return render_to_response("StudentHome.html",{'user':request.user,'group':group})
 	elif group == 'Department':
-		return render_to_response("DepartmentHome.html",{'user':request.user,'group':group})
+		return HttpResponseRedirect("/department/")
 	elif group == 'ExamCell':
-		return render_to_response("ExamCellHome.html",{'user':request.user,'group':group})
+		department_users = User.objects.filter(groups=Group.objects.get(name='Department'))
+		departments = [i.department for i in department_users]
+		return render_to_response("ExamCellHome.html",{'user':request.user,'group':group,'departments':departments})
 	else:
 		return HttpResponse('Invalid User')
 
-class StudentRegistrationForm(ModelForm):
-	class Meta:
-		model=Student
 
 
 def register(request):
@@ -33,6 +33,6 @@ def register(request):
 		form=StudentRegistrationForm(request.POST,request.FILES)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/apply/')
+			return HttpResponseRedirect('/student/apply/')
 		
 	

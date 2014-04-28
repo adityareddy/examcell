@@ -8,20 +8,28 @@
 			<h3 class="panel-title">Student Registration</h3>
 		</div>
 		<div class="panel-body registration-form">
-			<form role="form" method="post" action="/profile/" enctype="multipart/form-data">
+			<form role="form" method="post" action="/student/fillprofile/" enctype="multipart/form-data">
 			{% csrf_token %}
 			{% for field in form %}
 			{%ifnotequal field.name "user"%}
-			{{field.name}}
 			<div class="form-group">
 				{{ field.errors }}
 				<div class="row">
-					<div class='col-md-8 input-row-hover'>
-						<div class='col-md-4'>{{ field.label_tag }}</div>
-						<div class='col-md-8'>{{ field }}</div>
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'>{{ field.label_tag }}</div>
+					<div class='col-md-8'>
+						{% ifnotequal field.name "reg_id" %}
+							{{ field }}
+						{% else %}
+							<h4>{{user.username}}</h4>
+							<input type="hidden" name="reg_id" value="{{user.username}}" />
+						{% endifnotequal %}
 					</div>
 				</div>
+				</div>
             </div>
+            {% else %}
+            <input type="hidden" name="user" value="{{user.id}}"/>
             {%endifnotequal%}
 			{% endfor %}
 			<input type="submit" class="btn btn-primary" value="update"/>

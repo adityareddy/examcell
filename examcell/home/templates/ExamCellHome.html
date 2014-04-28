@@ -2,4 +2,48 @@
 
 {% block content %}
 
+<div class="container">
+	<h1>Notification Center</h1>
+	<form role="form" method="post" action="/notify/">
+		<div class="row">
+			<div class="form-group col-md-4">
+				<label>Type</label>
+				<select class="form-control" name="type">
+					<option value="sem">Semester End Examination</option>
+					<option value="supply">Semester End Supplementary Examination</option>
+				</select>
+			</div>
+			<div class="form-group col-md-4">
+				<label>Department</label>
+				<select class="form-control" name="dept">
+					{% for department in departments %}
+						<option value="supply">{{department.title}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="form-group col-md-4">
+				<label>Amount</label>
+				<input type="number" class="form-control" name="amount"/>
+			</div>			
+			<div class="form-group col-md-4">
+				<label>Last Date</label>
+				<input type="date" class="form-control" name="lastdate"/>
+			</div>
+			<div class="form-group col-md-4">
+				<label>Last Date With Fine</label>
+				<input type="date" class="form-control" name="lastdatewithfine"/>
+			</div>			
+			<div class="form-group col-md-4">
+				<label>Fine</label>
+				<input type="number" class="form-control" name="fine"/>
+			</div>
+			<div class="form-group col-md-4">
+				<button class="btn btn-primary">Notify</button>
+			</div>			
+		</div>
+	</form>
+</div>
+<script>
+$("input[type='date']").datepicker();
+</script>
 {% endblock %}

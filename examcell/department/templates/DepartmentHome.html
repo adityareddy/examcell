@@ -1,0 +1,28 @@
+{% extends "mainbase.html" %}
+
+{% block content %}
+<ul class="nav nav-tabs" id="tabmenu">
+  <li class="active"><a href="#notifications">Notifications</a></li>
+  <li><a href="#subjects" tab-target='/department/subjects/'>Subjects</a></li>
+  <li><a href="#detained" tab-target='/department/detained/'>Detained</a></li>
+  <li><a href="#condonation" tab-target='/department/condonation/'>Condonation</a></li>
+</ul>
+<div class="tab-content container">
+	<div class="tab-pane active" id="notifications">
+		
+	</div>
+	<div class="tab-pane" id="subjects">Loading...</div>
+	<div class="tab-pane" id="detained">Loading...</div>
+	<div class="tab-pane" id="condonation">Loading...</div>
+</div>
+<script>
+$(this).on('show.bs.tab',function(e){
+	  $(e.target.hash).load($(e.target).attr('tab-target')+"?seed="+Math.random());
+});
+$('#tabmenu a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show');
+})
+</script>
+
+{% endblock %}

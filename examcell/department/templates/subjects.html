@@ -1,0 +1,130 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div>
+				<button class="btn btn-primary" id="show-add-subject-button">Add Subject</button>
+			</div>
+			<div class="row well" id="add-subject-form" style="display:none;">
+				<div class="col-md-6">
+					<form role="form">
+						<div class="form-group">
+							<label>Subject Code</label>
+							<input type="text" class="form-control" id="in-subject-code"/>
+						</div>
+						<div class="form-group">
+							<label>Subject Title</label>
+							<input type="text" class="form-control" id="in-subject-title"/>
+						</div>
+						<div class="form-group">
+							<select class="form-control" id="in-semester">
+								<option value="1">I - Sem</option>
+								<option value="2">II - Sem</option>
+								<option value="3">III - Sem</option>
+								<option value="4">IV - Sem</option>
+								<option value="5">V - Sem</option>
+								<option value="6">VI - Sem</option>
+								<option value="7">VII - Sem</option>
+								<option value="8">VIII - Sem</option>
+							</select>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<select class="form-control" id="in-theory-or-lab">
+									<option value="T">Theory</option>
+									<option value="L">Lab</option>
+								</select>
+							</div>
+							<div class="col-md-8">
+								<input type="checkbox" id="in-optional"/>
+								<label for="optional">Optional</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label></label>
+							<button class="btn btn-default" id="add-subject-button">Add</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<table class="table table-hover table-bordered" id="subjects-table">
+				
+			</table>
+		</div>
+	</div>
+</div>
+<script>
+loadSubjects = function(){
+	$.ajax({
+		method:'GET',
+		url:'/department/subjects/list/',
+		dataType:'json',
+		success:function(data){
+			firstRow='<tr><th class="col-md-2">Subject Code</th><th>Subject Title</th><th>Semester</th><th>Type</th><th>Optional</th></tr>';
+			$("#subjects-table").html("");
+			$(firstRow).appendTo("#subjects-table");
+			for(var i in data) {
+				
+				if(data[i]['theoryOrLab']=='T') {
+					data[i]['theoryOrLab']='Theory';
+				} else {
+					data[i]['theoryOrLab']='Lab';
+				}
+				$("<tr><td>"
+						+data[i]['code']+"</td><td>"
+						+data[i]['title']+"</td><td>"
+						+data[i]['semester']+"</td><td>"
+						+data[i]['theoryOrLab']+"</td><td>"
+						+data[i]['optional']+"</td></tr>")
+					.appendTo("#subjects-table");
+			}
+		},
+		error:function(a,b,c){
+			console.log(a);
+			console.log(b);
+			console.log(c);
+		}
+	});
+};
+
+addSubject = function(){
+	var subjectCode = $("#in-subject-code").val();
+	var subjectTitle = $("#in-subject-title").val();
+	var theoryOrLab = $("#in-theory-or-lab").val();
+	var optional = $("#in-optional").is(":checked");
+	var semester = $("#in-semester").val();
+	
+	$.ajax({
+		method:'POST',
+		url:'/department/subjects/',
+		data:{
+			code:subjectCode,
+			title:subjectTitle,
+			theoryOrLab:theoryOrLab,
+			optional:optional,
+			semester:semester,
+			department:{{department.id}}
+		},
+		datType:'json',
+		success:function(d){console.log(d);loadSubjects();},
+		error:function(a,b,c){
+			console.log(a);
+			console.log(b);
+			console.log(c);
+		}
+	});
+};
+
+$(function(){
+	loadSubjects();
+	$("#show-add-subject-button").click(function(event){
+		$("#add-subject-form").show(100);
+	});
+	$("#add-subject-button").click(function(event){
+		event.preventDefault();
+		addSubject();
+		$("#add-subject-form").hide(100);
+	});
+});
+</script>

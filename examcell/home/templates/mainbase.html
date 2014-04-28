@@ -7,9 +7,11 @@
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/datepicker.css' %}">
 	<script src="{% static 'js/jquery.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
+	<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -29,7 +31,7 @@
 						{% if user.is_staff %}
 						<li><p class="navbar-text">{{ group }}</p></li>
 						{% else %}
-						<li><a href="apply" >Apply</a></li>
+						<li><a href="/student/apply" >Apply</a></li>
 						{% endif %}
 						<li><a href="#">Settings</a></li>
 						<li><p class="navbar-text">Hi {{ user.username }}! <a href="/accounts/logout" class="navbar-link">Logout</a></p></li>

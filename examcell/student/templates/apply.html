@@ -1,3 +1,6 @@
+{% extends "mainbase.html" %}
+
+{% block content %}
 <ul class="nav nav-tabs" id="tabmenu">
   <li class="active"><a href="#apply">Apply</a></li>
   <li><a href="#challan">Challan</a></li>
@@ -10,27 +13,20 @@
 		<div class="form-group">
 			<label for="rollnumber" class="col-sm-2">Roll Number</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="rollnumber" placeholder="Enter Roll Number" />
+				<input type="text" class="form-control" id="rollnumber" value="{{user.username}}" disabled />
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="rollnumber" class="col-sm-2">Branch</label>
 			<div class="col-sm-6">
-				<select class="form-control">
-					<option>- Branch -</option>
-					<option>II - SEM</option>
-					<option>III - SEM</option>
-					<option>IV - SEM</option>
-					<option>V - SEM</option>
-					<option>VI - SEM</option>
-				</select>
+				<input type="text" class="form-control" id="branch" value="{{user.student.branch}}" disabled />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2">Semester</label>
 			<div class="col-sm-6">
 				<select class="form-control">
-					<option>- SEM -</option>
+					<option>I</option>
 					<option>II - SEM</option>
 					<option>III - SEM</option>
 					<option>IV - SEM</option>
@@ -41,30 +37,18 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2">
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios1" value="regular" checked>
-						Regular
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios2" value="supplementary">
-						Suplementary
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios2" value="betterment">
-						Betterment
-					</label>
+				<div class="col-sm-4">
+					<select id="rors" name="rors" class="form-control">
+						<option value="R">Regular</option>
+						<option value="S">Supplementary</option>
+					</select>
 				</div>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="rollnumber" class="col-sm-2">Amount</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="rollnumber" placeholder="Amount" />
+				<input type="text" class="form-control" id="amount" placeholder="Amount" disabled value="0" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -106,6 +90,11 @@ $('#tabmenu a').click(function (e) {
   $(this).tab('show')
 })
 
+$("#rors").on("mouseover mouseout blur change",function(){
+	var amount;
+	$("#amount").val(amount);
+});
+
 $("#apply-button").unbind();
 $("#apply-button").click(function(event){
 	event.preventDefault();
@@ -118,3 +107,4 @@ $("#apply-button").click(function(event){
 	alert(JSON.stringify(obj));
 });
 </script>
+{% endblock %};
