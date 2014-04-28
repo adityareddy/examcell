@@ -5,6 +5,9 @@ from student.models import Student
 from django.http.response import HttpResponseRedirect, HttpResponse
 from django.forms.models import ModelForm
 from django.contrib.auth.models import Group, User
+from django import forms
+from home.models import Notification
+from datetime import datetime
 
 @login_required
 def home(request):
@@ -14,25 +17,36 @@ def home(request):
 	elif group == 'Department':
 		return HttpResponseRedirect("/department/")
 	elif group == 'ExamCell':
-		department_users = User.objects.filter(groups=Group.objects.get(name='Department'))
-		departments = [i.department for i in department_users]
-		return render_to_response("ExamCellHome.html",{'user':request.user,'group':group,'departments':departments})
+		return HttpResponseRedirect('/notify/')
 	else:
 		return HttpResponse('Invalid User')
 
 
-
-def register(request):
-	if request.method=='GET':
-		c={}
-		c.update(csrf(request))
-		c.update({'form':StudentRegistrationForm()})
-		return render_to_response("registration/register.html",c)
+#login_required
+def notify(request):
+	group = request.user.groups.values_list('name')[0][0]
+	department_users = User.objects.filter(groups=Group.objects.get(name='Department'))
+	departments = [i.department for i in department_users]
 	
-	if request.method=='POST':
-		form=StudentRegistrationForm(request.POST,request.FILES)
+	notifications = Notification.objects.all()
+	c={'user':request.user,'departments':departments,'notifications':notifications}
+	c.update(csrf(request))
+	if request.method == 'POST':
+		class NotificationForm(ModelForm):
+			class Meta:
+				model = Notification
+		
+		form = NotificationForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/student/apply/')
+			print "done"
 		
-	
+		c.update({'group':group})
+		c.update({'departments':departments})
+		c.update({'errors':form.errors})
+		c.update(csrf(request))
+		Notification.objects.filter(lastdate__lt=datetime.utcnow().date()).delete()
+		return render_to_response("ExamCellHome.html",c)
+	else:
+		Notification.objects.filter(lastdate__lt=datetime.utcnow().date()).delete()
+		return render_to_response("ExamCellHome.html",c)

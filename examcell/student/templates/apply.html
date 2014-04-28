@@ -23,27 +23,20 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2">Semester</label>
+			<label class="col-sm-2">Exam</label>
+			{% if notifications %}
 			<div class="col-sm-6">
-				<select class="form-control">
-					<option>I</option>
-					<option>II - SEM</option>
-					<option>III - SEM</option>
-					<option>IV - SEM</option>
-					<option>V - SEM</option>
-					<option>VI - SEM</option>
+				<select class="form-control" id="examnotifications">
+					{% for notification in notifications %}
+					<option value="{{notification.id}}" amount="{{notification.amount}}">{{notification.dept}} - {{notification.type}} - {{notification.sem}} - {{notification.amount}}/-</option>
+					{% endfor %}
 				</select>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2">
-				<div class="col-sm-4">
-					<select id="rors" name="rors" class="form-control">
-						<option value="R">Regular</option>
-						<option value="S">Supplementary</option>
-					</select>
-				</div>
+			{% else %}
+			<div class="col-sm-6">
+				<h4>No exam notifications</h4>
 			</div>
+			{% endif %}
 		</div>
 		<div class="form-group">
 			<label for="rollnumber" class="col-sm-2">Amount</label>
@@ -90,21 +83,23 @@ $('#tabmenu a').click(function (e) {
   $(this).tab('show')
 })
 
-$("#rors").on("mouseover mouseout blur change",function(){
-	var amount;
+$("#examnotifications").on("mouseout blur change",function(){
+	var amount = $("option:selected",this).attr("amount");
 	$("#amount").val(amount);
 });
 
 $("#apply-button").unbind();
 $("#apply-button").click(function(event){
 	event.preventDefault();
-	var obj=[];
-	$("input[type='text'],select").each(function(index,value){
-		console.log(index);
-		console.log($(value).val());
-		obj[index]=$(value).val();
+	obj={'notification':$("#examnotifications option:selected").val()};
+	$.ajax({
+		method:'POST',
+		url:'/student/apply/',
+		data:{'notification':$("#examnotifications option:selected").val()},
+		success:function(data){
+			alert(data);
+		}
 	});
-	alert(JSON.stringify(obj));
 });
 </script>
 {% endblock %};

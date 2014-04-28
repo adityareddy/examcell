@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from home.models import Notification
 
 class Student(models.Model):
 	user=models.OneToOneField(User)
@@ -17,3 +18,7 @@ class Student(models.Model):
 	photo=models.ImageField(upload_to='static/student_photos')
 	sign=models.ImageField(upload_to='static/student_signatures')
 
+class Applications(models.Model):
+	student = models.ForeignKey(Student)
+	notification = models.ForeignKey(Notification)
+	verified = models.BooleanField()
