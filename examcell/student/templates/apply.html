@@ -56,7 +56,7 @@
 		<h3>Challans Generated</h3>
 		<ul class="nav nav-default">
 			{% for a in applications %}
-			<li><button class="btn btn-default" value="{{a.id}}"/> {{a.notification.dept}} - {{a.notification.type}} - {{a.notification.sem}} - {{a.notification.amount}}/-</button></li>
+				<li><button class="btn btn-default" value="{{a.id}}"/> {{a.notification.dept}} - {{a.notification.type}} - {{a.notification.sem}} - {{a.notification.amount}}/-</button></li>
 			{% endfor %}
 		</ul>
   </div>
@@ -69,9 +69,12 @@
   <div class="tab-pane" id="hallticket">
   		<h3>Hallticket Generated</h3>
 		<ul class="nav nav-default">
-			<li><input type="checkbox" /> xxxxxxxxxxx</li>
+			{% for a in applications %}
+				{% ifequal a.verified True %}
+					<li><button class="btn btn-default" value="{{a.id}}"/> {{a.notification.dept}} - {{a.notification.type}} - {{a.notification.sem}} - {{a.notification.amount}}/-</button></li>
+				{% endifequal %} 
+			{% endfor %}
 		</ul>
-		<button class="btn btn-primary">Download Hallticket</button>
   </div>
 </div>
 <script>
@@ -101,7 +104,12 @@ $("#apply-button").click(function(event){
 });
 
 $("#challan button").click(function(){
-	console.log($(this).attr("value"));
+	//console.log($(this).attr("value"));
+	window.location = "/student/challan/?application="+$(this).attr("value");
+});
+$("#challan button").click(function(){
+	//console.log($(this).attr("value"));
+	window.location = "/student/hallticket/?hallticket="+$(this).attr("value");
 });
 </script>
 {% endblock %};

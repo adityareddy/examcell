@@ -1,7 +1,12 @@
 {% extends "mainbase.html" %}
 
-{% block content %}
+{% block menu %}
+<ul class="nav navbar-nav">
+	<li><a href="/verification/">Verification</a></li>
+</ul>
+{% endblock %}
 
+{% block content %}
 <div class="container">
 	<h1>Notification Center</h1>
 	{% if errors %}
@@ -74,13 +79,13 @@
 			</tr>
 			{% for notification in notifications %}
 				<tr>
-				<th>{{notification.id}}</th>
-				<th>{{notification.type}}</th>
-				<th>{{notification.dept}}</th>
-				<th>{{notification.amount}}</th>
-				<th>{{notification.lastdate}}</th>
-				<th>{{notification.lastdatewithfine}}</th>
-				<th>{{notification.fine}}</th>
+				<td>{{notification.id}}</td>
+				<td>{{notification.type}}</td>
+				<td>{{notification.dept}}</td>
+				<td>{{notification.amount}}</td>
+				<td>{{notification.lastdate}}</td>
+				<td>{{notification.lastdatewithfine}}</td>
+				<td>{{notification.fine}}</td>
 				</tr>
 			{% endfor %}
 		</table>

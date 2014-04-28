@@ -1,13 +1,15 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
-from student.models import Student
+from student.models import Student, Applications
 from django.http.response import HttpResponseRedirect, HttpResponse
 from django.forms.models import ModelForm
 from django.contrib.auth.models import Group, User
 from django import forms
 from home.models import Notification
 from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 @login_required
 def home(request):
@@ -22,7 +24,28 @@ def home(request):
 		return HttpResponse('Invalid User')
 
 
-#login_required
+
+@csrf_exempt
+@login_required
+def verification(request):
+	if request.method=='GET':
+		app = Applications.objects.filter(verified=False)
+		return render_to_response('verification.html',{'user':request.user,'applications':app})
+	elif request.method=='POST':
+		obj = json.loads(request.POST.get('data'))
+		
+		def verify(id):
+			a = Applications.objects.get(id=id)
+			a.verified = True
+			a.save()
+		count=0
+		for i in obj:
+			verify(i)
+			count+=1
+		return HttpResponse("Verified "+str(count)+" records")
+
+
+@login_required
 def notify(request):
 	group = request.user.groups.values_list('name')[0][0]
 	department_users = User.objects.filter(groups=Group.objects.get(name='Department'))

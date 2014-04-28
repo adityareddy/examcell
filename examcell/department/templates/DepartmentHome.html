@@ -9,7 +9,31 @@
 </ul>
 <div class="tab-content container">
 	<div class="tab-pane active" id="notifications">
-		
+		<h2>Department Notifications:</h2>
+		<table class="table table-hover table-bordered">
+			<tr>
+				<th>#</th>
+				<th>Exam Type</th>
+				<th>Department</th>
+				<th>Amount</th>
+				<th>Last Date</th>
+				<th>Last Date with Fine</th>
+				<th>Fine Amount</th>
+				<th class="col-md-1">Number of Students Applied</th>
+			</tr>
+			{% for notification in notifications %}
+				<tr>
+				<td>{{notification.id}}</td>
+				<td>{{notification.type}}</td>
+				<td>{{notification.dept}}</td>
+				<td>{{notification.amount}}</td>
+				<td>{{notification.lastdate}}</td>
+				<td>{{notification.lastdatewithfine}}</td>
+				<td>{{notification.fine}}</td>
+				<td>{{notification.applications_set.all|length}}</td>
+				</tr>
+			{% endfor %}
+		</table>
 	</div>
 	<div class="tab-pane" id="subjects">Loading...</div>
 	<div class="tab-pane" id="detained">Loading...</div>

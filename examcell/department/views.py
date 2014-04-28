@@ -5,10 +5,14 @@ from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import ModelForm
 import json
+from home.models import Notification
+from student.models import Applications
+
+
 @login_required
 def home(request):
-    return render_to_response('DepartmentHome.html',{'user':request.user})
-
+    notifications=Notification.objects.filter(dept='MCA')
+    return render_to_response('DepartmentHome.html',{'user':request.user,'notifications':notifications})
 
 @csrf_exempt
 @login_required

@@ -26,6 +26,7 @@
 				<a class="navbar-brand" href="/">VRSEC</a>
 			</div>
 			<div class="collapse navbar-collapse navbar-right" id="main-navbar-menu">
+				{% block menu %}{% endblock %}
 				<ul class="nav navbar-nav">
 					{% if user.is_authenticated %}
 						{% if user.is_staff %}
@@ -33,7 +34,6 @@
 						{% else %}
 						<li><a href="/student/apply" >Apply</a></li>
 						{% endif %}
-						<li><a href="#">Settings</a></li>
 						<li><p class="navbar-text">Hi {{ user.username }}! <a href="/accounts/logout" class="navbar-link">Logout</a></p></li>
 					{% else %}
 						<li><p class="navbar-text">Are you a student? <a href="/accounts/register" class="navbar-link">Register</a><p></li>
@@ -41,7 +41,7 @@
 					{% endif %}
 				</ul>
 			</div>
-			
+						
 		</div>
 	</nav>
 	<div id="content">

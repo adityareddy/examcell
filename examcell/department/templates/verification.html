@@ -1,0 +1,73 @@
+{% extends "mainbase.html" %}
+
+{% block menu %}
+<ul class="nav navbar-nav">
+	<li><a href="/notify/">Notifications</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h2>Verification</h2>
+		<table class="table table-hover table-bordered">
+		<tr>
+			<th>#</th>
+			<th>Reg Id</th>
+			<th>Exam Notification</th>
+			<th>
+				<div>Verify</div>
+				<button class="btn btn-primary btn-xs" id="select-all-button">select all</button>
+			</th>
+		</tr>
+		{% if applications %}
+			{% for app in applications %}
+				<tr>
+					<td>{{app.id}}</td>
+					<td>{{app.student.reg_id}}</td>
+					<td>{{app.notification.id}} - {{app.notification.type}} - {{app.notification.sem}} </td>
+					<td class="col-sm-1">
+						<input type="checkbox" app-id="{{app.id}}" />
+					</td>
+				</tr>
+			{% endfor %}
+		{% else %}
+		<div class="alert alert-danger">No Applications to verify</div>
+		{% endif %}
+		</table>
+		<div class="col-sm-2 col-sm-offset-10">
+		<button class="btn btn-primary" id="verify-all">Verify All</button>
+		</div>
+</div>
+<script>
+tog="off";
+$("#select-all-button").click(function(){
+	if(tog=="off") {
+		$("input[type='checkbox']").each(function(e){
+			$(this).prop('checked',true);
+		});
+		tog="on";
+	}else {
+		$("input[type='checkbox']").each(function(e){
+			$(this).prop('checked',false);
+		});
+		tog="off";
+	}
+});
+
+$("#verify-all").click(function(){
+	obj=[];
+	$("input[type='checkbox']:checked").each(function(e){
+		obj.push($(this).attr("app-id"));
+	});
+	$.ajax({
+		method:'post',
+		url:'/verification/',
+		data:{data:JSON.stringify(obj)},
+		success:function(data){
+			console.log(data);
+			window.location="/verification/";
+		}
+	});
+});
+</script>
+{% endblock %}
