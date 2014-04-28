@@ -5,6 +5,7 @@ from student.models import Student, Applications
 from django.forms.models import ModelForm
 from home.models import Notification
 from django.views.decorators.csrf import csrf_exempt
+from django.core.context_processors import csrf
 
 @csrf_exempt
 @login_required
@@ -17,7 +18,7 @@ def apply(request):
 			student = Student.objects.get(user=request.user)
 			applications = Applications.objects.filter(student__user=request.user)
 			notifications=Notification.objects.filter(dept=request.user.student.branch).exclude(applications=applications)
-			c={'user':request.user,'notifications':notifications}
+			c={'user':request.user,'notifications':notifications,'applications':applications}
 			return render_to_response("apply.html",c)
 		#except:
 		#	return HttpResponseRedirect("/student/fillprofile/")
@@ -28,7 +29,7 @@ def apply(request):
 		app.notification = Notification.objects.get(id=int(request.POST.get('notification')))
 		app.verified=False
 		app.save()
-		return HttpResponse("applied")
+		return HttpResponse("")
 		
 
 class StudentRegistrationForm(ModelForm):
@@ -55,3 +56,8 @@ def fillprofile(request):
 			return HttpResponseRedirect('/student/apply/')
 		else:
 			return HttpResponse(str(form.errors))
+		
+def challan(request):
+	response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
+    

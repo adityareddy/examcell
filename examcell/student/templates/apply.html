@@ -53,13 +53,12 @@
   	</form>
   </div>
   <div class="tab-pane" id="challan">
-		<h3>Challan Generated</h3>
+		<h3>Challans Generated</h3>
 		<ul class="nav nav-default">
-			<li><input type="checkbox" /> xxxxxxxxxxx</li>
-			<li><input type="checkbox" /> xxxxxxxxxxx</li>
-			<li><input type="checkbox" /> xxxxxxxxxxx</li>
+			{% for a in applications %}
+			<li><button class="btn btn-default" value="{{a.id}}"/> {{a.notification.dept}} - {{a.notification.type}} - {{a.notification.sem}} - {{a.notification.amount}}/-</button></li>
+			{% endfor %}
 		</ul>
-		<button class="btn btn-primary">Download Challan</button>
   </div>
   <div class="tab-pane" id="status">
 		<h3>Verification Status</h3>
@@ -70,8 +69,6 @@
   <div class="tab-pane" id="hallticket">
   		<h3>Hallticket Generated</h3>
 		<ul class="nav nav-default">
-			<li><input type="checkbox" /> xxxxxxxxxxx</li>
-			<li><input type="checkbox" /> xxxxxxxxxxx</li>
 			<li><input type="checkbox" /> xxxxxxxxxxx</li>
 		</ul>
 		<button class="btn btn-primary">Download Hallticket</button>
@@ -97,9 +94,14 @@ $("#apply-button").click(function(event){
 		url:'/student/apply/',
 		data:{'notification':$("#examnotifications option:selected").val()},
 		success:function(data){
-			alert(data);
+			console.log(data);
+			location.reload();
 		}
 	});
+});
+
+$("#challan button").click(function(){
+	console.log($(this).attr("value"));
 });
 </script>
 {% endblock %};
