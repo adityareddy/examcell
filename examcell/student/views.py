@@ -16,14 +16,14 @@ def apply(request):
 		return HttpResponseRedirect("/")
 	student = None
 	if request.method=='GET':
-		#try:
+		try:
 			student = Student.objects.get(user=request.user)
 			applications = Applications.objects.filter(student__user=request.user)
 			notifications=Notification.objects.filter(dept=request.user.student.branch).exclude(applications=applications)
 			c={'user':request.user,'notifications':notifications,'applications':applications}
 			return render_to_response("apply.html",c)
-		#except:
-		#	return HttpResponseRedirect("/student/fillprofile/")
+		except:
+			return HttpResponseRedirect("/student/fillprofile/")
 
 	elif request.method=='POST':
 		app = Applications()
