@@ -52,6 +52,8 @@ def fillprofile(request):
 			return render_to_response("fillprofile.html",c)
 	
 	if request.method=='POST':
+		print request.user.id
+		print request.POST
 		form=StudentRegistrationForm(request.POST,request.FILES)
 		if form.is_valid():
 			form.save()

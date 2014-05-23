@@ -10,28 +10,230 @@
 		<div class="panel-body registration-form">
 			<form role="form" method="post" action="/student/fillprofile/" enctype="multipart/form-data">
 			{% csrf_token %}
-			{% for field in form %}
-			{%ifnotequal field.name "user"%}
+<input type="hidden" name="user" value="{{user.id}}"/>
+            
+			
+			
 			<div class="form-group">
-				{{ field.errors }}
+				
 				<div class="row">
 				<div class='col-md-8 input-row-hover'>
-					<div class='col-md-4'>{{ field.label_tag }}</div>
+					<div class='col-md-4'><label for="id_reg_id">Reg id:</label></div>
 					<div class='col-md-8'>
-						{% ifnotequal field.name "reg_id" %}
-							{{ field }}
-						{% else %}
-							<h4>{{user.username}}</h4>
-							<input type="hidden" name="reg_id" value="{{user.username}}" />
-						{% endifnotequal %}
+						
+							<h4>{{user}}</h4>
+							<input type="hidden" name="reg_id" value="{{user}}" />
+						
 					</div>
 				</div>
 				</div>
             </div>
-            {% else %}
-            <input type="hidden" name="user" value="{{user.id}}"/>
-            {%endifnotequal%}
-			{% endfor %}
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_first_name">First name:</label></div>
+					<div class='col-md-8'>
+						
+							<input id="id_first_name" maxlength="128" name="first_name" type="text" />
+						
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_last_name">Last name:</label></div>
+					<div class='col-md-8'>
+						
+							<input id="id_last_name" maxlength="128" name="last_name" type="text" />
+						
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_email">Email:</label></div>
+					<div class='col-md-8'>
+						
+							<input id="id_email" maxlength="75" name="email" type="email" />
+						
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_phone_number">Phone number:</label></div>
+					<div class='col-md-8'>
+							<input id="id_phone_number" name="phone_number" type="text" maxlength="14"/>
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_gender">Gender:</label></div>
+					<div class='col-md-8'>
+							<!--<input id="id_gender" maxlength="2" name="gender" type="text" /> -->
+							<div>
+								<input type="radio" name="gender" value="M">
+								<label>Male</label>
+								<input type="radio" name="gender" value="F">
+								<label>Female</label>
+							</div>
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_state">State:</label></div>
+					<div class='col-md-8'>
+						
+							<input id="id_state" maxlength="128" name="state" type="text" />
+						
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_city">City:</label></div>
+					<div class='col-md-8'>
+						
+							<input id="id_city" maxlength="128" name="city" type="text" />
+						
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_pincode">Pincode:</label></div>
+					<div class='col-md-8'>
+						
+							<input id="id_pincode" name="pincode" type="text" />
+						
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_branch">Branch:</label></div>
+					<div class='col-md-8'>
+						
+							<input id="id_branch" maxlength="128" name="branch" type="text" />
+						
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_semester">Semester:</label></div>
+					<div class='col-md-8'>
+						
+							<select id="id_semester" name="semester">
+<option value="" selected="selected">---------</option>
+<option value="1">I</option>
+<option value="2">II</option>
+<option value="3">III</option>
+<option value="4">IV</option>
+<option value="5">V</option>
+<option value="6">VI</option>
+<option value="7">VII</option>
+<option value="8">VIII</option>
+</select>
+						
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_photo">Photo:</label></div>
+					<div class='col-md-8'>
+						
+							<input id="id_photo" name="photo" type="file" />
+						
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
+			
+			<div class="form-group">
+				
+				<div class="row">
+				<div class='col-md-8 input-row-hover'>
+					<div class='col-md-4'><label for="id_sign">Sign:</label></div>
+					<div class='col-md-8'>
+						
+							<input id="id_sign" name="sign" type="file" />
+						
+					</div>
+				</div>
+				</div>
+            </div>
+            
+			
 			<input type="submit" class="btn btn-primary" value="update"/>
 			</form>
 		</div>
@@ -58,6 +260,30 @@ $("#id_first_name,#id_last_name").on("keyup blur change",function(event){
 	regno=$(this).val();
 	if(!RegExp(/^[A-Za-z]{2,}$/).test(regno)) {
 		$(this).popover({html:true,content:"<div class='alert alert-danger'>Invalid name</div>",trigger:'manual',container:'body'});
+		if($(".popover").length==0) {
+			$(this).popover('show');
+		}
+	}else {
+		$(this).popover('destroy');
+	}
+});
+
+$("#id_phone_number").on("keyup blur change",function(event){
+	regno=$(this).val();
+	if(!RegExp(/^[0-9]{10,}$/).test(regno)) {
+		$(this).popover({html:true,content:"<div class='alert alert-danger'>Invalid phone number</div>",trigger:'manual',container:'body'});
+		if($(".popover").length==0) {
+			$(this).popover('show');
+		}
+	}else {
+		$(this).popover('destroy');
+	}
+});
+
+$("#id_pincode").on("keyup blur change",function(event){
+	regno=$(this).val();
+	if(!RegExp(/^[0-9]{6,}$/).test(regno)) {
+		$(this).popover({html:true,content:"<div class='alert alert-danger'>Invalid pincode</div>",trigger:'manual',container:'body'});
 		if($(".popover").length==0) {
 			$(this).popover('show');
 		}
