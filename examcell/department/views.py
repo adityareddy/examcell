@@ -22,6 +22,16 @@ def subjects(request):
             model=Subject
 
     if request.method=="GET":
+        sem = request.GET.get('sem',False)
+        dept = request.GET.get('dept',False)
+        print sem,dept
+        if sem and dept:
+            subjects=Subject.objects.filter(semester=sem,department=dept)
+            s=''
+            for subject in subjects:
+                s=s+"<input type='checkbox' name='supply-subj' class='supply-subjects'><label>"+subject.code+"</label>"
+            return HttpResponse(s)
+		
         department = Department.objects.get(user=request.user)
         subjects = Subject.objects.filter(department=department.id)
         return render_to_response('subjects.html',{'department':department,'subjects':subjects})

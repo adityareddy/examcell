@@ -28,7 +28,7 @@
 			<div class="col-sm-6">
 				<select class="form-control" id="examnotifications">
 					{% for notification in notifications %}
-					<option value="{{notification.id}}" amount="{{notification.amount}}">{{notification.dept}} - {{notification.type}} - {{notification.sem}} - {{notification.amount}}/-</option>
+					<option value="{{notification.id}}" dept="{{notification.dept}}" amount="{{notification.amount}}" exam-type="{{notification.type}}" semester="{{notification.sem}}">{{notification.dept}} - {{notification.type}} - {{notification.sem}} - {{notification.amount}}/-</option>
 					{% endfor %}
 				</select>
 			</div>
@@ -37,6 +37,10 @@
 				<h4>No exam notifications</h4>
 			</div>
 			{% endif %}
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2">Subjects</label>
+			<div id="supply-subjects"></div>
 		</div>
 		<div class="form-group">
 			<label for="rollnumber" class="col-sm-2">Amount</label>
@@ -83,9 +87,34 @@ $('#tabmenu a').click(function (e) {
   $(this).tab('show')
 })
 
+function getSubjects(sem,dept) {
+	var subjectsList = "";
+	$.ajax({
+		method:'GET',
+		url:'/department/subjects/',
+		data:{sem:sem,dept:dept},
+		success:function(data){
+			subjectsList = data;
+			return data;
+		},
+		async:false
+	});
+	return subjectsList;
+}
+
 $("#examnotifications").on("mouseout blur change",function(){
 	var amount = $("option:selected",this).attr("amount");
+	var sem = $("option:selected",this).attr("semester");
+	var dept = $("option:selected",this).attr("dept");
 	$("#amount").val(amount);
+	
+	subjects = getSubjects(sem,1);
+	$("#supply-subjects").html(subjects);
+	$("input[type=checkbox]").on("click", function(){
+		var n = $("input:checked" ).length;
+		var amount = n*200;
+		$("#amount").val(amount);
+	});
 });
 
 $("#apply-button").unbind();
@@ -111,5 +140,8 @@ $("#hallticket button").click(function(){
 	//console.log($(this).attr("value"));
 	window.location = "/student/hallticket/?hallticket="+$(this).attr("value");
 });
+
+
+
 </script>
 {% endblock %};
