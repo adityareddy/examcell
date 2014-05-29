@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+from django.contrib.auth import views as auth_views
 from django.contrib import admin
 admin.autodiscover()
 
@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^student/challan/$', 'student.views.challan', name='challan'),
     url(r'^student/hallticket/$', 'student.views.hallticket', name='hallticket'),
     url(r'^student/fillprofile/$', 'student.views.fillprofile', name='fillprofile'),
+    url(r'^student/editprofile/$', 'student.views.editprofile', name='editprofile'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'next_page':'/accounts/login/'}),
@@ -23,4 +24,25 @@ urlpatterns = patterns('',
     url(r'^department/subjects/list/$','department.views.subjectslist',name='department.subjects.list'),
     url(r'^department/detained/$','department.views.detained',name='department.detained'),
     url(r'^department/condonation/$','department.views.condonation',name='department.condonation'),
+    url(r'^bank/$','banker.views.home',name='banker.home'),
+    url(r'^bank/paid/$','banker.views.paid',name='banker.paid'),
+
+      url(r'^password/change/$',
+                    auth_views.password_change,
+                    name='password_change'),
+      url(r'^password/change/done/$',
+                    auth_views.password_change_done,
+                    name='password_change_done'),
+      url(r'^password/reset/$',
+                    auth_views.password_reset,
+                    name='password_reset'),
+      url(r'^password/reset/done/$',
+                    auth_views.password_reset_done,
+                    name='password_reset_done'),
+      url(r'^password/reset/complete/$',
+                    auth_views.password_reset_complete,
+                    name='password_reset_complete'),
+      url(r'^password/reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
+                    auth_views.password_reset_confirm,
+                    name='password_reset_confirm'),
 )

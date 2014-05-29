@@ -59,15 +59,23 @@ $("#verify-all").click(function(){
 	$("input[type='checkbox']:checked").each(function(e){
 		obj.push($(this).attr("app-id"));
 	});
-	$.ajax({
-		method:'post',
-		url:'/verification/',
-		data:{data:JSON.stringify(obj)},
-		success:function(data){
-			console.log(data);
-			window.location="/verification/";
-		}
-	});
+	var r=confirm("Confirm verification?");
+	if (r==true)
+	{
+		$.ajax({
+			method:'post',
+			url:'/verification/',
+			data:{data:JSON.stringify(obj)},
+			success:function(data){
+				console.log(data);
+				window.location="/verification/";
+			}
+		});
+	}
+	else
+	{
+		//
+	} 
 });
 </script>
 {% endblock %}

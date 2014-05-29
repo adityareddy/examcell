@@ -15,11 +15,14 @@ import json
 def home(request):
 	group = request.user.groups.values_list('name')[0][0]
 	if group == 'Student':
-		return render_to_response("StudentHome.html",{'user':request.user,'group':group})
+		notifications = Notification.objects.all()
+		return render_to_response("StudentHome.html",{'user':request.user,'group':group,'notifications':notifications})
 	elif group == 'Department':
 		return HttpResponseRedirect("/department/")
 	elif group == 'ExamCell':
 		return HttpResponseRedirect('/notify/')
+	elif group == 'Banker':
+		return HttpResponseRedirect('/bank/')
 	else:
 		return HttpResponse('Invalid User')
 
@@ -29,7 +32,7 @@ def home(request):
 @login_required
 def verification(request):
 	if request.method=='GET':
-		app = Applications.objects.filter(verified=False)
+		app = Applications.objects.filter(verified=False,paid=True)
 		return render_to_response('verification.html',{'user':request.user,'applications':app})
 	elif request.method=='POST':
 		obj = json.loads(request.POST.get('data'))

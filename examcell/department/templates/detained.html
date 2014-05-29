@@ -1,0 +1,53 @@
+<div>
+<button class="btn btn-primary" data-toggle="modal" data-target="#addStudentModal">Detain Student</button>
+</div>
+
+<div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Detain Student</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+			<label>Select Student</label>
+			<select id="detainedstudentid">
+				{% for student in students %}
+					<option>{{student.reg_id}}</option>
+				{% endfor %}
+			</select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="detainbutton">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function(){
+	function detainstudent(id) {
+		$.ajax({
+			url:'/department/detained/',
+			type:'post',
+			data:{'id':id},
+			success:function(data){
+				
+			},
+			error:function(a,b,c) {
+				alert(JSON.stringify(a));
+				alert(b);
+				alert(c);
+			}
+		});
+	}
+	$("#detainbutton").click(function(){
+		var detainedstudentid = $("#detainedstudentid").val();
+		detainstudent(detainedstudentid);
+		$("#addStudentModal").modal("hide");
+	});
+});
+</script>

@@ -6,7 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import ModelForm
 import json
 from home.models import Notification
-from student.models import Applications
+from student.models import Student,Applications
+from django.contrib.auth.models import User
 
 
 @login_required
@@ -61,9 +62,17 @@ def subjectslist(request):
     return HttpResponse(json.dumps(l))
 
 
+@csrf_exempt
 @login_required
 def detained(request):
-    return render_to_response('detained.html',{})
+	if request.method=='POST':
+		x=request.POST.get('id',None)
+		print x
+		return HttpResponse(x)
+	department = Department.objects.get(user=request.user)
+	students = Student.objects.filter(branch=department.user)
+	#students = User.objects.filter(username__istartswith='118')
+	return render_to_response('detained.html',{'students':students})
 
 @login_required
 def condonation(request):

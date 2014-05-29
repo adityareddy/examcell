@@ -31,8 +31,22 @@
 					{% if user.is_authenticated %}
 						{% if user.is_staff %}
 						<li><p class="navbar-text">{{ group }}</p></li>
+						{% elif user.username == "Bank" %}
+						<li></li>
 						{% else %}
 						<li><a href="/student/apply" >Apply</a></li>
+						
+						<li>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile
+							<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="/student/editprofile/">Edit Profile</a></li>
+								<li><a href="/password/change/">Change Password</a></li>
+							</ul>
+						</li>
+						
+						
 						{% endif %}
 						<li><p class="navbar-text">Hi {{ user.username }}! <a href="/accounts/logout" class="navbar-link">Logout</a></p></li>
 					{% else %}

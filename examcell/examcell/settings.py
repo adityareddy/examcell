@@ -26,6 +26,14 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+TEMPLATE_DIRS = ('/home/ratanraj/devel/examcell/examcell/templates/',
+                 os.path.join(BASE_DIR,'home/templates/'),
+                 os.path.join(BASE_DIR,'banker/templates/'),
+                 os.path.join(BASE_DIR,'department/templates/'),
+                 os.path.join(BASE_DIR,'student/templates/'),
+                 )
+
+TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',)
 
 # Application definition
 
@@ -39,6 +47,7 @@ INSTALLED_APPS = (
     'home',
     'student',
     'department',
+    'banker'
 )
 
 MIDDLEWARE_CLASSES = (

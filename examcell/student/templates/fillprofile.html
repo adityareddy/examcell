@@ -168,8 +168,12 @@
 					<div class='col-md-4'><label for="id_branch">Branch:</label></div>
 					<div class='col-md-8'>
 						
-							<input id="id_branch" maxlength="128" name="branch" type="text" />
-						
+							<!-- <input id="id_branch" maxlength="128" name="branch" type="text" /> -->
+							<select id="id_branch" name="branch" class="form-control">
+								{% for dept in departments %}
+									<option>{{dept.title}}</option>
+								{% endfor %}
+							</select>
 					</div>
 				</div>
 				</div>
@@ -184,7 +188,7 @@
 					<div class='col-md-4'><label for="id_semester">Semester:</label></div>
 					<div class='col-md-8'>
 						
-							<select id="id_semester" name="semester">
+							<select id="id_semester" name="semester" class="form-control">
 <option value="" selected="selected">---------</option>
 <option value="1">I</option>
 <option value="2">II</option>

@@ -1,0 +1,54 @@
+{% extends "mainbase.html" %}
+
+{% block content %}
+
+<div class="col-md-12">
+	<div class="col-md-4">
+		<form role="form" method="post">
+			<div class="form-group">
+				<label>Challan Number:</label>
+				<input type="text" name="challan" class="form-control" >
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary">Show</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+{% if paid %}
+<h3>Already Paid</h3>
+{% endif %}
+
+{% if application %}
+<div class="col-md-12">
+	<div class="col-md-4">
+		<table class="table table-hover table-bordered">
+			<tr>
+				<th class="col-md-6">R.No</th>
+				<td class="col-md-6">{{application.student.reg_id}}</td>
+			</tr>
+			<tr>
+				<th>Name</th>
+				<td>{{application.student.first_name}},{{application.student.last_name}}</td>
+			</tr>
+			<tr>
+				<th>Branch</th>
+				<td>{{application.student.branch}}</td>
+			</tr>
+			<tr>
+				<th>Amount</th>
+				<td>{{application.amount}}/-</td>
+			</tr>
+		</table>
+		<form action='/bank/paid/' method='post' class="col-md-3">
+			<input type="hidden" name="challan" value="{{application.id}}" />
+			<button class="btn btn-primary">Paid</button>
+		</form>
+		<form action='' method='get' class="col-md-3">
+			<button class="btn btn-danger">Canvel</button>
+		</form>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

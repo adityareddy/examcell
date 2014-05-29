@@ -60,7 +60,7 @@
 		<h3>Challans Generated</h3>
 		<ul class="nav nav-default">
 			{% for a in applications %}
-				<li><button class="btn btn-default" value="{{a.id}}"/> {{a.notification.dept}} - {{a.notification.type}} - {{a.notification.sem}} - {{a.notification.amount}}/-</button></li>
+				<li><button class="btn btn-default" value="{{a.id}}"/> {{a.notification.dept}} - {{a.notification.type}} - {{a.notification.sem}} - {{a.amount}}/-</button></li>
 			{% endfor %}
 		</ul>
   </div>
@@ -68,7 +68,7 @@
 		<h3>Verification Status</h3>
 		<p>Applied<span class="glyphicon glyphicon-ok"></span></p>
 		<p>Fees Paid<span class="glyphicon glyphicon-ok"></span></p>
-		<p>Verified<span class="glyphicon glyphicon-ok"></span></p>
+		<p>Verified<span class="glyphicon glyphicon-ok"></span></p>6+
   </div>
   <div class="tab-pane" id="hallticket">
   		<h3>Hallticket Generated</h3>
@@ -106,15 +106,21 @@ $("#examnotifications").on("mouseout blur change",function(){
 	var amount = $("option:selected",this).attr("amount");
 	var sem = $("option:selected",this).attr("semester");
 	var dept = $("option:selected",this).attr("dept");
-	$("#amount").val(amount);
+	var examtype = $("option:selected",this).attr("exam-type");
 	
-	subjects = getSubjects(sem,1);
-	$("#supply-subjects").html(subjects);
-	$("input[type=checkbox]").on("click", function(){
-		var n = $("input:checked" ).length;
-		var amount = n*200;
-		$("#amount").val(amount);
-	});
+	$("#amount").val(amount);
+	if(examtype=='supply') {
+		$("#amount").val("");
+		subjects = getSubjects(sem,1);
+		$("#supply-subjects").html(subjects);
+		$("input[type=checkbox]").on("click", function(){
+			var n = $("input:checked" ).length;
+			var amt = n*amount;
+			$("#amount").val(amt);
+		});
+	} else {
+		$("#supply-subjects").html("");
+	}
 });
 
 $("#apply-button").unbind();
@@ -124,10 +130,14 @@ $("#apply-button").click(function(event){
 	$.ajax({
 		method:'POST',
 		url:'/student/apply/',
-		data:{'notification':$("#examnotifications option:selected").val()},
+		data:{'notification':$("#examnotifications option:selected").val(),'amount':$("#amount").val()},
 		success:function(data){
-			console.log(data);
+			alert(data);
 			location.reload();
+		},error:function(a,b,c) {
+			alert(JSON.stringify(a));
+			alert(b);
+			alert(c);
 		}
 	});
 });

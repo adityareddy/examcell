@@ -32,4 +32,6 @@ class Student(models.Model):
 class Applications(models.Model):
 	student = models.ForeignKey(Student)
 	notification = models.ForeignKey(Notification)
+	amount =  models.IntegerField()
 	verified = models.BooleanField()
+	paid = models.BooleanField()
