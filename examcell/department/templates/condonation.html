@@ -2,27 +2,77 @@
 <button class="btn btn-primary" data-toggle="modal" data-target="#addStudentModal">Condonation</button>
 </div>
 
+{% if condonationstudents %}
+<h3>Students with condonation</h3>
+<table class="table table-hover table-bordered">
+	<tr><th>Reg No.</th><th>Name</th><th>Amount</th></tr>
+	{% for student in condonationstudents %}
+		<tr>
+			<td>{{student.reg_id}}</td>
+			<td>{{student.first_name}} {{student.last_name}}</td>
+			<td>{{student.condonation}}</td>
+		</tr>
+	{% endfor %}
+</table>
+{% endif %}
+
 <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Condonation</h4>
+        <h4 class="modal-title" id="myModalLabel">Detain Student</h4>
       </div>
       <div class="modal-body">
+      	{% if students %}
         <div>
 			<label>Select Student</label>
-			<select>
+			<select id="detainedstudentid">
 				{% for student in students %}
 					<option>{{student.reg_id}}</option>
 				{% endfor %}
 			</select>
+		</div>
+		<div>
+			<label>Amount:</label>
+			<input type="number" id="amount" />
         </div>
+        {% else %}
+        	<h3>No students for condonation!</h3>
+        {% endif %}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        {% if students %}
+        <button type="button" class="btn btn-primary" id="detainbutton">Detain</button>
+        {% endif %}
       </div>
     </div>
   </div>
 </div>
+
+<script>
+$(function(){
+	function condonation(id,amount) {
+		$.ajax({
+			url:'/department/condonation/',
+			type:'post',
+			data:{'id':id,'amount':amount},
+			success:function(data){
+				alert(data)
+			},
+			error:function(a,b,c) {
+				alert(JSON.stringify(a));
+				alert(b);
+				alert(c);
+			}
+		});
+	}
+	$("#detainbutton").click(function(){
+		var detainedstudentid = $("#detainedstudentid").val();
+		var amount = $("#amount").val();
+		condonation(detainedstudentid,amount);
+		$("#addStudentModal").modal("hide");
+	});
+});
+</script>

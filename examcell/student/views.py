@@ -24,7 +24,11 @@ def apply(request):
 			student = Student.objects.get(user=request.user)
 			applications = Applications.objects.filter(student__user=request.user)
 			notifications=Notification.objects.filter(dept=request.user.student.branch).exclude(applications=applications)
-			c={'user':request.user,'notifications':notifications,'applications':applications}
+			c={'user':request.user,'notifications':notifications,'applications':applications,'username':student.first_name}
+			if student.condonation>0:
+				c.update({'condonation':student.condonation})
+			if student.detained==True:
+				c.update({'detained':True})
 			return render_to_response("apply.html",c)
 		except:
 			return HttpResponseRedirect("/student/fillprofile/")
@@ -69,6 +73,9 @@ def fillprofile(request):
 		print request.user.id
 		print request.POST
 		form=StudentRegistrationForm(request.POST,request.FILES)
+		form.data['detained']=False
+		form.data['condonation']=0
+		print(form.data.items)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect('/student/apply/')
@@ -79,7 +86,10 @@ def fillprofile(request):
 @csrf_exempt
 def editprofile(request):
 	if request.method=='GET':
-			student = Student.objects.get(user=request.user)
+			try:
+				student = Student.objects.get(user=request.user)
+			except:
+				return HttpResponseRedirect("/student/fillprofile/")
 			c={}
 			c.update(csrf(request))
 			c.update({'form':StudentRegistrationForm()})

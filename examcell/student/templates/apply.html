@@ -1,10 +1,13 @@
 {% extends "mainbase.html" %}
 
 {% block content %}
+{% if detained %}
+<h3>You have been detained. Contact your HOD.</h3>
+{% else %}
 <ul class="nav nav-tabs" id="tabmenu">
   <li class="active"><a href="#apply">Apply</a></li>
   <li><a href="#challan">Challan</a></li>
-  <li><a href="#status">Status</a></li>
+  <!-- <li><a href="#status">Status</a></li> -->
   <li><a href="#hallticket">Hallticket</a></li>
 </ul>
 <div class="tab-content container">
@@ -57,8 +60,11 @@
   	</form>
   </div>
   <div class="tab-pane" id="challan">
-		<h3>Challans Generated</h3>
+		<h3><u>Challans</u></h3>
 		<ul class="nav nav-default">
+		{% if condonation %}
+		<li><button class="btn btn-default" /> Condonation: {{condonation}}/- </button></li>
+		{% endif %}
 			{% for a in applications %}
 				<li><button class="btn btn-default" value="{{a.id}}"/> {{a.notification.dept}} - {{a.notification.type}} - {{a.notification.sem}} - {{a.amount}}/-</button></li>
 			{% endfor %}
@@ -68,7 +74,7 @@
 		<h3>Verification Status</h3>
 		<p>Applied<span class="glyphicon glyphicon-ok"></span></p>
 		<p>Fees Paid<span class="glyphicon glyphicon-ok"></span></p>
-		<p>Verified<span class="glyphicon glyphicon-ok"></span></p>6+
+		<p>Verified<span class="glyphicon glyphicon-ok"></span></p>
   </div>
   <div class="tab-pane" id="hallticket">
   		<h3>Hallticket Generated</h3>
@@ -144,6 +150,7 @@ $("#apply-button").click(function(event){
 
 $("#challan button").click(function(){
 	//console.log($(this).attr("value"));
+	
 	window.location = "/student/challan/?application="+$(this).attr("value");
 });
 $("#hallticket button").click(function(){
@@ -154,4 +161,5 @@ $("#hallticket button").click(function(){
 
 
 </script>
+{% endif %}
 {% endblock %};

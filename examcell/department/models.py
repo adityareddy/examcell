@@ -14,11 +14,11 @@ class Subject(models.Model):
     theoryOrLab = models.CharField(max_length=1)
     optional = models.BooleanField()
 
-class Detained(models.Model):
-    department = models.ForeignKey(Department)
-    students = models.ManyToManyField(Student)
-
-class Condonation(models.Model):
-    department = models.ForeignKey(Department)
-    students = models.ManyToManyField(Student)
-    amount = models.FloatField()
+# class Detained(models.Model):
+#     department = models.ForeignKey(Department)
+#     students = models.ManyToManyField(Student)
+# 
+# class Condonation(models.Model):
+#     department = models.ForeignKey(Department)
+#     students = models.ManyToManyField(Student)
+#     amount = models.FloatField()

@@ -2,6 +2,20 @@
 <button class="btn btn-primary" data-toggle="modal" data-target="#addStudentModal">Detain Student</button>
 </div>
 
+{% if detainedstudents %}
+<h3>Detained Students</h3>
+<table class="table table-hover table-bordered">
+	<tr><th>Reg No.</th><th>Name</th><th>Delete</th></tr>
+	{% for student in detainedstudents %}
+		<tr>
+			<td>{{student.reg_id}}</td>
+			<td>{{student.first_name}} {{student.last_name}}</td>
+			<td><button class="removebutton btn btn-danger" reg-id="{{student.reg_id}}">x</button></td>
+		</tr>
+	{% endfor %}
+</table>
+{% endif %}
+
 <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -11,17 +25,23 @@
       </div>
       <div class="modal-body">
         <div>
+        	{% if students %}
 			<label>Select Student</label>
 			<select id="detainedstudentid">
 				{% for student in students %}
 					<option>{{student.reg_id}}</option>
 				{% endfor %}
 			</select>
+			{% else %}
+			<h3>No students to detain!</h3>
+			{% endif %}
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="detainbutton">Save changes</button>
+        {% if students %}
+        <button type="button" class="btn btn-primary" id="detainbutton">Detain</button>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -35,7 +55,7 @@ $(function(){
 			type:'post',
 			data:{'id':id},
 			success:function(data){
-				
+				alert(data)
 			},
 			error:function(a,b,c) {
 				alert(JSON.stringify(a));
@@ -44,10 +64,32 @@ $(function(){
 			}
 		});
 	}
+	
+	function removedetainstudent(id) {
+		$.ajax({
+			url:'/department/detained/',
+			type:'post',
+			data:{'id':id,'remove':'remove'},
+			success:function(data){
+				alert(data)
+			},
+			error:function(a,b,c) {
+				alert(JSON.stringify(a));
+				alert(b);
+				alert(c);
+			}
+		});
+	}
+	
 	$("#detainbutton").click(function(){
 		var detainedstudentid = $("#detainedstudentid").val();
 		detainstudent(detainedstudentid);
 		$("#addStudentModal").modal("hide");
+	});
+	$(".removebutton").click(function(){
+		var regid = $(this).attr("reg-id");
+		removedetainstudent(regid);
+		window.location='';
 	});
 });
 </script>

@@ -28,6 +28,8 @@ class Student(models.Model):
 	semester=models.IntegerField(choices=SEMESTER_CHOICES)
 	photo=models.ImageField(upload_to='static/student_photos')
 	sign=models.ImageField(upload_to='static/student_signatures')
+	detained = models.BooleanField()
+	condonation = models.IntegerField()
 
 class Applications(models.Model):
 	student = models.ForeignKey(Student)

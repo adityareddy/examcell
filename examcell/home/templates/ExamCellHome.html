@@ -3,11 +3,12 @@
 {% block menu %}
 <ul class="nav navbar-nav">
 	<li><a href="/verification/">Verification</a></li>
+	<li><a href="/admin">Adminstrative Console</a></li>
 </ul>
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container page-container">
 	<h1>Notification Center</h1>
 	{% if errors %}
 	<div class="alert alert-danger">
@@ -22,6 +23,7 @@
 				<select class="form-control" name="type">
 					<option value="sem">Semester End Examination</option>
 					<option value="supply">Semester End Supplementary Examination</option>
+					<option value="reval">Revaluation</option>
 				</select>
 			</div>
 			<div class="form-group col-md-3">

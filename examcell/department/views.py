@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 @login_required
 def home(request):
     notifications=Notification.objects.filter(dept='MCA')
-    return render_to_response('DepartmentHome.html',{'user':request.user,'notifications':notifications})
+    return render_to_response('DepartmentHome.html',{'user':request.user,'notifications':notifications,'department':request.user.username})
 
 @csrf_exempt
 @login_required
@@ -65,16 +65,38 @@ def subjectslist(request):
 @csrf_exempt
 @login_required
 def detained(request):
-	if request.method=='POST':
-		x=request.POST.get('id',None)
-		print x
-		return HttpResponse(x)
-	department = Department.objects.get(user=request.user)
-	students = Student.objects.filter(branch=department.user)
-	#students = User.objects.filter(username__istartswith='118')
-	return render_to_response('detained.html',{'students':students})
+    if request.method=='POST':
+        x=request.POST.get('id',None)
+        print x
+        student = Student.objects.get(reg_id=x)
+        if request.POST.get('remove',False):
+            student.detained = False
+            student.save()
+            return HttpResponse('Removed')
+        student.detained=True
+        student.save()
+        print student.first_name
+        return HttpResponse(str(x)+" Detained!")
+    department = Department.objects.get(user=request.user)
+    students = Student.objects.filter(branch=department.title,detained=False)
+    detainedstudents = Student.objects.filter(branch=department.title,detained=True)
+    print students
+    #students = User.objects.filter(username__istartswith='118')
+    return render_to_response('detained.html',{'students':students,'detainedstudents':detainedstudents})
 
+@csrf_exempt
 @login_required
 def condonation(request):
-    return render_to_response('condonation.html',{})
+    if request.method == 'POST':
+        x=request.POST.get('id',None)
+        amt = request.POST.get('amount',0)
+        student = Student.objects.get(reg_id=x)
+        student.condonation=int(amt)
+        student.save()
+        return HttpResponse('Condonation of '+amt+' for '+str(x)+' is imposed!')
+        
+    department = Department.objects.get(user=request.user)
+    students = Student.objects.filter(branch=department.title,condonation=0)
+    condonationstudents = Student.objects.filter(branch=department.title,condonation__gt=0)
+    return render_to_response('condonation.html',{'students':students,'condonationstudents':condonationstudents})
 

@@ -1,52 +1,53 @@
 {% extends "mainbase.html" %}
 
 {% block content %}
-<ul class="nav nav-tabs" id="tabmenu">
-  <li class="active"><a href="#notifications">Notifications</a></li>
-  <li><a href="#subjects" tab-target='/department/subjects/'>Subjects</a></li>
-  <li><a href="#detained" tab-target='/department/detained/'>Detained</a></li>
-  <li><a href="#condonation" tab-target='/department/condonation/'>Condonation</a></li>
-</ul>
-<div class="tab-content container">
-	<div class="tab-pane active" id="notifications">
-		<h2>Department Notifications:</h2>
-		<table class="table table-hover table-bordered">
-			<tr>
-				<th>#</th>
-				<th>Exam Type</th>
-				<th>Department</th>
-				<th>Amount</th>
-				<th>Last Date</th>
-				<th>Last Date with Fine</th>
-				<th>Fine Amount</th>
-				<th class="col-md-1">Number of Students Applied</th>
-			</tr>
-			{% for notification in notifications %}
+<div class="container page-container">
+	<ul class="nav nav-tabs" id="tabmenu">
+	  <li class="active"><a href="#notifications">Notifications</a></li>
+	  <li><a href="#subjects" tab-target='/department/subjects/'>Subjects</a></li>
+	  <li><a href="#detained" tab-target='/department/detained/'>Detained</a></li>
+	  <li><a href="#condonation" tab-target='/department/condonation/'>Condonation</a></li>
+	</ul>
+	<div class="tab-content container">
+		<div class="tab-pane active" id="notifications">
+			<h2>Department Notifications:</h2>
+			<table class="table table-hover table-bordered">
 				<tr>
-				<td>{{notification.id}}</td>
-				<td>{{notification.type}}</td>
-				<td>{{notification.dept}}</td>
-				<td>{{notification.amount}}</td>
-				<td>{{notification.lastdate}}</td>
-				<td>{{notification.lastdatewithfine}}</td>
-				<td>{{notification.fine}}</td>
-				<td>{{notification.applications_set.all|length}}</td>
+					<th>#</th>
+					<th>Exam Type</th>
+					<th>Department</th>
+					<th>Amount</th>
+					<th>Last Date</th>
+					<th>Last Date with Fine</th>
+					<th>Fine Amount</th>
+					<th class="col-md-1">Number of Students Applied</th>
 				</tr>
-			{% endfor %}
-		</table>
+				{% for notification in notifications %}
+					<tr>
+					<td>{{notification.id}}</td>
+					<td>{{notification.type}}</td>
+					<td>{{notification.dept}}</td>
+					<td>{{notification.amount}}</td>
+					<td>{{notification.lastdate}}</td>
+					<td>{{notification.lastdatewithfine}}</td>
+					<td>{{notification.fine}}</td>
+					<td>{{notification.applications_set.all|length}}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<div class="tab-pane" id="subjects">Loading...</div>
+		<div class="tab-pane" id="detained">Loading...</div>
+		<div class="tab-pane" id="condonation">Loading...</div>
 	</div>
-	<div class="tab-pane" id="subjects">Loading...</div>
-	<div class="tab-pane" id="detained">Loading...</div>
-	<div class="tab-pane" id="condonation">Loading...</div>
+	<script>
+	$(this).on('show.bs.tab',function(e){
+		  $(e.target.hash).load($(e.target).attr('tab-target')+"?seed="+Math.random());
+	});
+	$('#tabmenu a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show');
+	})
+	</script>
 </div>
-<script>
-$(this).on('show.bs.tab',function(e){
-	  $(e.target.hash).load($(e.target).attr('tab-target')+"?seed="+Math.random());
-});
-$('#tabmenu a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show');
-})
-</script>
-
 {% endblock %}

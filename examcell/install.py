@@ -93,6 +93,8 @@ def add_student(name):
     student.set_password(name)
     student.is_staff=False
     student.is_active=True
+    student.detained = False
+    student.condonation = 0
     student.save()
     student_group = Group.objects.get(name='Student')
     student_group.user_set.add(student)

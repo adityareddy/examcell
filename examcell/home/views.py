@@ -16,7 +16,12 @@ def home(request):
 	group = request.user.groups.values_list('name')[0][0]
 	if group == 'Student':
 		notifications = Notification.objects.all()
-		return render_to_response("StudentHome.html",{'user':request.user,'group':group,'notifications':notifications})
+		username=''
+		try:
+			username = Student.objects.get(reg_id=request.user.username).first_name
+		except:
+			username=request.user.username
+		return render_to_response("StudentHome.html",{'user':request.user,'group':group,'notifications':notifications,'username':username})
 	elif group == 'Department':
 		return HttpResponseRedirect("/department/")
 	elif group == 'ExamCell':
