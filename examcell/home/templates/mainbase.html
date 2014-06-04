@@ -1,65 +1,1220 @@
 <!doctype html>
 {% load staticfiles %}
-<html lang="en">
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta content="width=device-width, initial-scale=1" name="viewport"/>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/font-awesome/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/simple-line-icons/simple-line-icons.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/uniform/css/uniform.default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/css/introjs.min.css' %}">
+	
+
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css' %}">	
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/jqvmap/jqvmap/jqvmap.css' %}">
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/admin/pages/css/tasks.css' %}">
+		
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/css/components.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/css/plugins.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/admin/layout/css/layout.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/admin/layout/css/themes/darkblue.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/admin/layout/css/custom.css' %}">
+	
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/datepicker.css' %}">
+   {% block pagecss %}{% endblock %}
+   	
 	<script src="{% static 'js/jquery.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
 	<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+
+    <link rel="shortcut icon" href="favicon.ico"/>
 </head>
-<body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-menu">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/">Velagapudi Ramakrishna Siddhartha Engineering College</a>
-			</div>
-			<div class="collapse navbar-collapse navbar-right" id="main-navbar-menu">
-				{% block menu %}{% endblock %}
-				<ul class="nav navbar-nav">
-					{% if user.is_authenticated %}
+<body class="page-header-fixed ">
+
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <a href="/">
+            <img src="{% static 'assets/admin/layout/img/examcell.png' %}" alt="logo" class="logo-default"/>
+            </a>
+            <div class="menu-toggler sidebar-toggler hide">
+                <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+            </div>
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <div class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+        </div>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <!-- BEGIN TOP NAVIGATION MENU -->
+        
+        <!-- BEGIN HORIZANTAL MENU -->
+<div class="hor-menu hidden-sm hidden-xs">
+    <ul class="nav navbar-nav">
+        <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the horizontal opening on mouse hover -->
+        <li class="classic-menu-dropdown active">
+            <a href="/">
+            Dashboard <span class="selected">
+            </span>
+            </a>
+        </li>
+        <li class="mega-menu-dropdown">
+            <a data-hover="dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+            Mega <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <!-- Content container to add padding -->
+                    <div class="mega-menu-content">
+                        <div class="row">
+                            <ul class="col-md-4 mega-menu-submenu">
+                                <li>
+                                    <h3>Layouts</h3>
+                                </li>
+                                <li>
+                                    <a href="index_horizontal_menu.html">
+                                    <i class="fa fa-angle-right"></i> Dashboard & Mega Menu </a>
+                                </li>
+                                <li>
+                                    <a href="layout_horizontal_sidebar_menu.html">
+                                    <i class="fa fa-angle-right"></i> Horizontal & Sidebar Menu </a>
+                                </li>
+                                <li>
+                                    <a href="layout_glyphicons.html">
+                                    <i class="fa fa-angle-right"></i>
+                                    Layout with Glyphicon <span class="badge badge-roundless badge-danger">
+                                    new </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="layout_horizontal_menu1.html">
+                                    <i class="fa fa-angle-right"></i> Horizontal Mega Menu 1 </a>
+                                </li>
+                                <li>
+                                    <a href="layout_horizontal_menu2.html">
+                                    <i class="fa fa-angle-right"></i> Horizontal Mega Menu 2 </a>
+                                </li>
+                                <li>
+                                    <a href="layout_search_on_header1.html">
+                                    <i class="fa fa-angle-right"></i> Search Box On Header 1 </a>
+                                </li>
+                            </ul>
+                            <ul class="col-md-4 mega-menu-submenu">
+                                <li>
+                                    <h3>More Layouts</h3>
+                                </li>
+                                <li>
+                                    <a href="layout_search_on_header2.html">
+                                    <i class="fa fa-angle-right"></i> Search Box On Header 2 </a>
+                                </li>
+                                <li>
+                                    <a href="layout_sidebar_search_option1.html">
+                                    <i class="fa fa-angle-right"></i> Sidebar Search Option 1 </a>
+                                </li>
+                                <li>
+                                    <a href="layout_sidebar_search_option2.html">
+                                    <i class="fa fa-angle-right"></i> Sidebar Search Option 2 </a>
+                                </li>
+                                <li>
+                                    <a href="layout_sidebar_reversed.html">
+                                    <i class="fa fa-angle-right"></i> Right Sidebar Page </a>
+                                </li>
+                                <li>
+                                    <a href="layout_sidebar_fixed.html">
+                                    <i class="fa fa-angle-right"></i> Sidebar Fixed Page </a>
+                                </li>
+                                <li>
+                                    <a href="layout_sidebar_closed.html">
+                                    <i class="fa fa-angle-right"></i> Sidebar Closed Page </a>
+                                </li>
+                            </ul>
+                            <ul class="col-md-4 mega-menu-submenu">
+                                <li>
+                                    <h3>Even More!</h3>
+                                </li>
+                                <li>
+                                    <a href="layout_ajax.html">
+                                    <i class="fa fa-angle-right"></i> Content Loading via Ajax </a>
+                                </li>
+                                <li>
+                                    <a href="layout_disabled_menu.html">
+                                    <i class="fa fa-angle-right"></i> Disabled Menu Links </a>
+                                </li>
+                                <li>
+                                    <a href="layout_blank_page.html">
+                                    <i class="fa fa-angle-right"></i> Blank Page </a>
+                                </li>
+                                <li>
+                                    <a href="layout_boxed_page.html">
+                                    <i class="fa fa-angle-right"></i> Boxed Page </a>
+                                </li>
+                                <li>
+                                    <a href="layout_language_bar.html">
+                                    <i class="fa fa-angle-right"></i> Language Switch Bar </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="mega-menu-dropdown mega-menu-full">
+            <a data-hover="dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+            Full Mega <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <!-- Content container to add padding -->
+                    <div class="mega-menu-content ">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <ul class="col-md-4 mega-menu-submenu">
+                                    <li>
+                                        <h3>Layouts</h3>
+                                    </li>
+                                    <li>
+                                        <a href="index_horizontal_menu.html">
+                                        <i class="fa fa-angle-right"></i> Dashboard & Mega Menu </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_horizontal_sidebar_menu.html">
+                                        <i class="fa fa-angle-right"></i> Horizontal & Sidebar Menu </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_glyphicons.html">
+                                        <i class="fa fa-angle-right"></i>
+                                        Layout with Glyphicon <span class="badge badge-roundless badge-danger">
+                                        new </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_horizontal_menu1.html">
+                                        <i class="fa fa-angle-right"></i> Horizontal Mega Menu 1 </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_horizontal_menu2.html">
+                                        <i class="fa fa-angle-right"></i> Horizontal Mega Menu 2 </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_search_on_header1.html">
+                                        <i class="fa fa-angle-right"></i> Search Box On Header 1 </a>
+                                    </li>
+                                </ul>
+                                <ul class="col-md-4 mega-menu-submenu">
+                                    <li>
+                                        <h3>More Layouts</h3>
+                                    </li>
+                                    <li>
+                                        <a href="layout_search_on_header2.html">
+                                        <i class="fa fa-angle-right"></i> Search Box On Header 2 </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_sidebar_search_option1.html">
+                                        <i class="fa fa-angle-right"></i> Sidebar Search Option 1 </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_sidebar_search_option2.html">
+                                        <i class="fa fa-angle-right"></i> Sidebar Search Option 2 </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_sidebar_reversed.html">
+                                        <i class="fa fa-angle-right"></i> Right Sidebar Page </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_sidebar_fixed.html">
+                                        <i class="fa fa-angle-right"></i> Sidebar Fixed Page </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_sidebar_closed.html">
+                                        <i class="fa fa-angle-right"></i> Sidebar Closed Page </a>
+                                    </li>
+                                </ul>
+                                <ul class="col-md-4 mega-menu-submenu">
+                                    <li>
+                                        <h3>Even More!</h3>
+                                    </li>
+                                    <li>
+                                        <a href="layout_disabled_menu.html">
+                                        <i class="fa fa-angle-right"></i> Disabled Menu Links </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_blank_page.html">
+                                        <i class="fa fa-angle-right"></i> Blank Page </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_boxed_page.html">
+                                        <i class="fa fa-angle-right"></i> Boxed Page </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_language_bar.html">
+                                        <i class="fa fa-angle-right"></i> Language Switch Bar </a>
+                                    </li>
+                                    <li>
+                                        <a href="layout_ajax.html">
+                                        <i class="fa fa-angle-right"></i> Content Loading via Ajax </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-5">
+                                <div id="accordion" class="panel-group">
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="collapsed">
+                                                Mega Menu Info #1 </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse in">
+                                            <div class="panel-body">
+                                                Metronic Mega Menu Works for fixed and responsive layout and has the facility to include (almost) any Bootstrap elements.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-danger">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">
+                                                Mega Menu Info #2 </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                Metronic Mega Menu Works for fixed and responsive layout and has the facility to include (almost) any Bootstrap elements.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                                Mega Menu Info #3 </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                Metronic Mega Menu Works for fixed and responsive layout and has the facility to include (almost) any Bootstrap elements.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="classic-menu-dropdown">
+            <a data-hover="dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+            Classic <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu pull-left">
+                <li>
+                    <a href="#">
+                    <i class="fa fa-bookmark-o"></i> Section 1 </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="fa fa-user"></i> Section 2 </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="fa fa-puzzle-piece"></i> Section 3 </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="fa fa-gift"></i> Section 4 </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="fa fa-table"></i> Section 5 </a>
+                </li>
+                <li class="dropdown-submenu">
+                    <a href="javascript:;">
+                    <i class="fa fa-envelope-o"></i> More options </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">
+                            Second level link </a>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="javascript:;">
+                            More options </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="index.html">
+                                    Third level link </a>
+                                </li>
+                                <li>
+                                    <a href="index.html">
+                                    Third level link </a>
+                                </li>
+                                <li>
+                                    <a href="index.html">
+                                    Third level link </a>
+                                </li>
+                                <li>
+                                    <a href="index.html">
+                                    Third level link </a>
+                                </li>
+                                <li>
+                                    <a href="index.html">
+                                    Third level link </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="index.html">
+                            Second level link </a>
+                        </li>
+                        <li>
+                            <a href="index.html">
+                            Second level link </a>
+                        </li>
+                        <li>
+                            <a href="index.html">
+                            Second level link </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+{% block menu %}{% endblock %}
+    </ul>
+</div>
+<!-- END HORIZANTAL MENU -->
+
+        <div class="top-menu">
+            <ul class="nav navbar-nav pull-right">
+                <!-- BEGIN NOTIFICATION DROPDOWN -->
+                <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <i class="fa fa-warning"></i>
+                    <span class="badge badge-default">
+                    7 </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <p>
+                                 You have 14 new notifications
+                            </p>
+                        </li>
+                        <li>
+                            <ul class="dropdown-menu-list scroller" style="height: 250px;">
+                                <li>
+                                    <a href="#">
+                                    <span class="label label-sm label-icon label-success">
+                                    <i class="fa fa-plus"></i>
+                                    </span>
+                                    New user registered. <span class="time">
+                                    Just now </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="external">
+                            <a href="#">
+                            See all notifications <i class="m-icon-swapright"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END NOTIFICATION DROPDOWN -->
+                <!-- BEGIN INBOX DROPDOWN -->
+                <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <i class="fa fa-envelope"></i>
+                    <span class="badge badge-default">
+                    4 </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <p>
+                                 You have 12 new messages
+                            </p>
+                        </li>
+                        <li>
+                            <ul class="dropdown-menu-list scroller" style="height: 250px;">
+                                <li>
+                                    <a href="inbox.html?a=view">
+                                    <span class="photo">
+                                    <img src="http://placehold.it/40x40" alt=""/>
+                                    </span>
+                                    <span class="subject">
+                                    <span class="from">
+                                    Lisa Wong </span>
+                                    <span class="time">
+                                    Just Now </span>
+                                    </span>
+                                    <span class="message">
+                                    Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="inbox.html?a=view">
+                                    <span class="photo">
+                                    <img src="http://placehold.it/40x40" alt=""/>
+                                    </span>
+                                    <span class="subject">
+                                    <span class="from">
+                                    Richard Doe </span>
+                                    <span class="time">
+                                    46 mins </span>
+                                    </span>
+                                    <span class="message">
+                                    Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="external">
+                            <a href="inbox.html">
+                            See all messages <i class="m-icon-swapright"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END INBOX DROPDOWN -->
+                <!-- BEGIN TODO DROPDOWN -->
+                <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <i class="fa fa-tasks"></i>
+                    <span class="badge badge-default">
+                    3 </span>
+                    </a>
+                    <ul class="dropdown-menu extended tasks">
+                        <li>
+                            <p>
+                                 You have 12 pending tasks
+                            </p>
+                        </li>
+                        <li>
+                            <ul class="dropdown-menu-list scroller" style="height: 250px;">
+                                <li>
+                                    <a href="#">
+                                    <span class="task">
+                                    <span class="desc">
+                                    New release v1.2 </span>
+                                    <span class="percent">
+                                    30% </span>
+                                    </span>
+                                    <span class="progress">
+                                    <span style="width: 40%;" class="progress-bar progress-bar-success" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only">
+                                    40% Complete </span>
+                                    </span>
+                                    </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <span class="task">
+                                    <span class="desc">
+                                    New UI release </span>
+                                    <span class="percent">
+                                    18% </span>
+                                    </span>
+                                    <span class="progress progress-striped">
+                                    <span style="width: 18%;" class="progress-bar progress-bar-important" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only">
+                                    18% Complete </span>
+                                    </span>
+                                    </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="external">
+                            <a href="#">
+                            See all tasks <i class="m-icon-swapright"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END TODO DROPDOWN -->
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                {% if user.is_authenticated %}
+                <li class="dropdown dropdown-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <img alt="" class="img-circle" src="http://placehold.it/29x29"/>
+                    <span class="username">
+                    
 						{% if user.is_staff %}
-						<li><p class="navbar-text">{{ group }}</p></li>
+						{{ group }}
 						{% elif user.username == "Bank" %}
-						<li></li>
 						{% else %}
-						<li><a href="/student/apply" >Apply</a></li>
-						
-						<li>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile
-							<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="/student/editprofile/">Edit Profile</a></li>
-								<li><a href="/password/change/">Change Password</a></li>
-							</ul>
-						</li>
-						
-						
 						{% endif %}
-						<li><p class="navbar-text">{% if username %}Hi {{ username }}{% else %}{% if department %}Department Of {{department}}{%else%}Examcell{%endif%}{% endif %}! <a href="/accounts/logout" class="navbar-link">Logout</a></p></li>
-					{% else %}
+                    
+                    {% if username %}Hi {{ username }}{% else %}{% if department %}Department Of {{department}}{%else%}Examcell{%endif%}{% endif %}
+
+					
+                        
+                    </span>
+                    <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/student/editprofile/">
+                            <i class="fa fa-user"></i> My Profile </a>
+                        </li>
+                        <li>
+                            <a href="page_calendar.html">
+                            <i class="fa fa-calendar"></i> My Calendar </a>
+                        </li>
+                        <li>
+                            <a href="inbox.html">
+                            <i class="fa fa-envelope"></i> My Inbox <span class="badge badge-danger">
+                            3 </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/student/apply">
+                            <i class="fa fa-tasks"></i> Apply <span class="badge badge-success">
+                            7 </span>
+                            </a>
+                        </li>
+                        <li class="divider">
+                        </li>
+                        <li>
+                            <a href="/password/change/">
+                            <i class="fa fa-lock"></i> Change Password </a>
+                        </li>
+                        <li>
+                            <a href="/accounts/logout">
+                            <i class="fa fa-key"></i> Log Out </a>
+                        </li>
+                    </ul>
+                </li>
+                    {% else %}
 						<li><p class="navbar-text">Are you a student? <a href="/accounts/register" class="navbar-link">Register</a><p></li>
 						<li><p class="navbar-text">Already registered? <a href="/accounts/login" class="navbar-link">Login.</a></p></li>
 					{% endif %}
+                <!-- END USER LOGIN DROPDOWN -->
+                <!-- END USER LOGIN DROPDOWN -->
+                
+                <li class="btn-collapse-sidebar-right dropdown"><a class="dropdown-toggle"><i class="fa fa-comments"></i></a></li>
+                
+                
+            </ul>
+        </div>
+        <!-- END TOP NAVIGATION MENU -->
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <div class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <ul class="page-sidebar-menu" data-auto-scroll="false" data-auto-speed="200">
+            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+            <li class="sidebar-toggler-wrapper">
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler">
+                </div>
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+            </li>
+            <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+            <li class="sidebar-search-wrapper">
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+                <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+                <form class="sidebar-search" action="extra_search.html" method="POST">
+                    <a href="javascript:;" class="remove">
+                    </a>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <!-- DOC: value=" ", that is, value with space must be passed to the submit button -->
+                            <input class="btn submit" type="button" type="button" value=" "/>
+                        </span>
+                    </div>
+                </form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+            <li class="start active ">
+                <a href="/">
+                <i class="fa fa-home"></i>
+                <span class="title">
+                Dashboard </span>
+                <span class="selected">
+                </span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="title">
+                Performance </span>
+                <span class="arrow ">
+                </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="ecommerce_index.html">
+                        <i class="fa fa-bullhorn"></i>
+                        Dashboard </a>
+                    </li>
+                    <li>
+                        <a href="ecommerce_orders.html">
+                        <i class="fa fa-shopping-cart"></i>
+                        Orders </a>
+                    </li>
+                    <li>
+                        <a href="ecommerce_orders_view.html">
+                        <i class="fa fa-tags"></i>
+                        Order View </a>
+                    </li>
+                    <li>
+                        <a href="ecommerce_products.html">
+                        <i class="fa fa-sitemap"></i>
+                        Products </a>
+                    </li>
+                    <li>
+                        <a href="ecommerce_products_edit.html">
+                        <i class="fa fa-file-o"></i>
+                        Product Edit </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;" class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="View all your Assignments and Deadlines here">
+                <i class="fa fa-gift"></i>
+                <span class="title">
+                Assignments </span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                <i class="fa fa-bookmark-o"></i>
+                <span class="title">
+                Groups </span>
+                <span class="arrow ">
+                </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="ui_colors.html">
+                        <span class="badge badge-roundless badge-danger">
+                        new </span>
+                        Flat UI Colors </a>
+                    </li>
+                    <li>
+                        <a href="ui_general.html">
+                        General Components </a>
+                    </li>
+                    <li>
+                        <a href="ui_buttons.html">
+                        Buttons & Icons </a>
+                    </li>
+                    <li>
+                        <a href="ui_typography.html">
+                        Typography </a>
+                    </li>
+                    <li>
+                        <a href="ui_tabs_accordions_navs.html">
+                        Tabs, Accordions & Navs </a>
+                    </li>
+                    <li>
+                        <a href="ui_tree.html">
+                        <span class="badge badge-roundless badge-danger">
+                        new </span>
+                        Tree View </a>
+                    </li>
+                    <li>
+                        <a href="ui_page_progress_style_1.html">
+                        <span class="badge badge-roundless badge-warning">
+                        new </span>
+                        Page Progress Bar </a>
+                    </li>
+                    <li>
+                        <a href="ui_blockui.html">
+                        Block UI </a>
+                    </li>
+                    <li>
+                        <a href="ui_notific8.html">
+                        Notific8 Notifications </a>
+                    </li>
+                    <li>
+                        <a href="ui_toastr.html">
+                        Toastr Notifications </a>
+                    </li>
+                    <li>
+                        <a href="ui_alert_dialog_api.html">
+                        <span class="badge badge-roundless badge-danger">
+                        new </span>
+                        Alerts & Dialogs API </a>
+                    </li>
+                    <li>
+                        <a href="ui_session_timeout.html">
+                        Session Timeout </a>
+                    </li>
+                    <li>
+                        <a href="ui_idle_timeout.html">
+                        User Idle Timeout </a>
+                    </li>
+                    <li>
+                        <a href="ui_modals.html">
+                        Modals </a>
+                    </li>
+                    <li>
+                        <a href="ui_extended_modals.html">
+                        Extended Modals </a>
+                    </li>
+                    <li>
+                        <a href="ui_tiles.html">
+                        Tiles </a>
+                    </li>
+                    <li>
+                        <a href="ui_datepaginator.html">
+                        <span class="badge badge-roundless badge-success">
+                        new </span>
+                        Date Paginator </a>
+                    </li>
+                    <li>
+                        <a href="ui_nestable.html">
+                        Nestable List </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                <i class="fa fa-map-marker"></i>
+                <span class="title">
+                Soceities </span>
+                <span class="arrow ">
+                </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="maps_google.html">
+                        Google Maps </a>
+                    </li>
+                    <li>
+                        <a href="maps_vector.html">
+                        Vector Maps </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="last ">
+                <a href="charts.html">
+                <i class="fa fa-bar-chart-o"></i>
+                <span class="title">
+                Visual Charts </span>
+                </a>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+</div>
+<!-- END SIDEBAR -->
+
+<div class="sidebar-right-heading">
+				<ul class="nav nav-tabs square nav-justified">
+				  <li class="active"><a href="#online-user-sidebar" data-toggle="tab"><i class="fa fa-comments"></i></a></li>
+				  <li class=""><a href="#notification-sidebar" data-toggle="tab"><i class="fa fa-bell"></i></a></li>
+				  <li class=""><a href="#task-sidebar" data-toggle="tab"><i class="fa fa-tasks"></i></a></li>
+				  <li class=""><a href="#setting-sidebar" data-toggle="tab"><i class="fa fa-cogs"></i></a></li>
 				</ul>
 			</div>
+
+<div class="sidebar-right sidebar-nicescroller" style="overflow: hidden; outline: none;" tabindex="5001">
+				<div class="tab-content">
+				  <div class="tab-pane fade active in" id="online-user-sidebar">
+					<ul class="sidebar-menu online-user">
+						<li class="static">ONLINE USERS</li>
+						<li><a href="#fakelink">
+							<span class="user-status success"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<i class="fa fa-mobile-phone device-status"></i>
+							Thomas White 
+							<span class="small-caps">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status success"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							Doina Slaivici
+							<span class="small-caps">Duis autem vel eum iriure dolor in hendrerit in </span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status success"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<i class="fa fa-android device-status"></i>
+							Harry Nichols
+							<span class="small-caps">I think so</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status success"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<i class="fa fa-mobile-phone device-status"></i>
+							Mihaela Cihac
+							<span class="small-caps">Yes, I'll be waiting</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status success"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<i class="fa fa-apple device-status"></i>
+							Harold Chavez
+							<span class="small-caps">Thank you!</span>
+						</a></li>
 						
-		</div>
-	</nav>
-	<div id="content">
-		{% block content %}{% endblock %}
-	</div>
+						<li class="static">IDLE USERS</li>
+						<li><a href="#fakelink">
+							<span class="user-status warning"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<i class="fa fa-windows device-status"></i>
+							Elizabeth Owens
+							<span class="small-caps">2 hours</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status warning"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<i class="fa fa-apple device-status"></i>
+							Frank Oliver
+							<span class="small-caps">4 hours</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status warning"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							Mya Weastell
+							<span class="small-caps">15 minutes</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status warning"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<i class="fa fa-mobile-phone device-status"></i>
+							Carl Rodriguez
+							<span class="small-caps">20 hours</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status warning"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<i class="fa fa-mobile-phone device-status"></i>
+							Nikita Carter
+							<span class="small-caps">2 minutes</span>
+						</a></li>
+						
+						<li class="static">OFFLINE USERS</li>
+						<li><a href="#fakelink">
+							<span class="user-status danger"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							Craig Dixon
+							<span class="small-caps">Last seen 2 hours ago</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status danger"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							Mikayla King
+							<span class="small-caps">Last seen yesterday</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status danger"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							Richard Dixon
+							<span class="small-caps">Last seen Feb 20, 2014 05:45:50</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status danger"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							Brenda Fuller
+							<span class="small-caps">Last seen Feb 15, 2014 11:35:50</span>
+						</a></li>
+						<li><a href="#fakelink">
+							<span class="user-status danger"></span>
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							Ryan Ortega
+							<span class="small-caps">Last seen Jan 20, 2014 03:45:50</span>
+						</a></li>
+					</ul>
+				  </div>
+				  <div class="tab-pane fade" id="notification-sidebar">
+					<ul class="sidebar-menu sidebar-notification">
+						<li class="static">TODAY</li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="" data-placement="left" data-original-title="Karen Wallace">
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<span class="activity">Posted something on your profile page</span>
+							<span class="small-caps">17 seconds ago</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="Phillip Lucas" data-placement="left">
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<span class="activity">Uploaded a photo</span>
+							<span class="small-caps">2 hours ago</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="Sandra Myers" data-placement="left">
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<span class="activity">Commented on your post</span>
+							<span class="small-caps">5 hours ago</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="Charles Guerrero" data-placement="left">
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<span class="activity">Send you a message</span>
+							<span class="small-caps">17 hours ago</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="Maria Simpson" data-placement="left">
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<span class="activity">Change her avatar</span>
+							<span class="small-caps">20 hours ago</span>
+						</a></li>
+						
+						<li class="static">YESTERDAY</li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="Jason Crawford" data-placement="left">
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<span class="activity">Posted something on your profile page</span>
+							<span class="small-caps">Yesterday 10:45:12</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="Cynthia Mendez" data-placement="left">
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<span class="activity">Uploaded a photo</span>
+							<span class="small-caps">Yesterday 08:00:05</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="Peter Ramirez" data-placement="left">
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<span class="activity">Commented on your post</span>
+							<span class="small-caps">Yesterday 07:49:08</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="Jessica Gutierrez" data-placement="left">
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<span class="activity">Send you a message</span>
+							<span class="small-caps">Yesterday 07:35:19</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="Ryan Ortega" data-placement="left">
+							<img src="http://placehold.it/35x35" class="ava-sidebar img-circle" alt="Avatar">
+							<span class="activity">Change her avatar</span>
+							<span class="small-caps">Yesterday 06:00:00</span>
+						</a></li>
+						
+						<li class="static text-center"><button class="btn btn-primary btn-sm">See all notifications</button></li>
+					</ul>
+				  </div>
+				  <div class="tab-pane fade" id="task-sidebar">
+					<ul class="sidebar-menu sidebar-task">
+						<li class="static">UNCOMPLETED</li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="in progress" data-placement="left">
+							<i class="fa fa-clock-o icon-task-sidebar progress"></i>
+							Creating documentation
+							<span class="small-caps">Deadline : Next week</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="uncompleted" data-placement="left">
+							<i class="fa fa-exclamation-circle icon-task-sidebar uncompleted"></i>
+							Eating sand
+							<span class="small-caps">Deadline : 2 hours ago</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="uncompleted" data-placement="left">
+							<i class="fa fa-exclamation-circle icon-task-sidebar uncompleted"></i>
+							Sending payment
+							<span class="small-caps">Deadline : 2 seconds ago</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="in progress" data-placement="left">
+							<i class="fa fa-clock-o icon-task-sidebar progress"></i>
+							Uploading new version
+							<span class="small-caps">Deadline : Tomorrow</span>
+						</a></li>
+						
+						<li class="static">COMPLETED</li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="completed" data-placement="left">
+							<i class="fa fa-check-circle-o icon-task-sidebar completed"></i>
+							Drinking coffee
+							<span class="small-caps">Completed : 10 hours ago</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="completed" data-placement="left">
+							<i class="fa fa-check-circle-o icon-task-sidebar completed"></i>
+							Walking to nowhere
+							<span class="small-caps">Completed : Yesterday</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="completed" data-placement="left">
+							<i class="fa fa-check-circle-o icon-task-sidebar completed"></i>
+							Sleeping under bridge
+							<span class="small-caps">Completed : Feb 10 2014</span>
+						</a></li>
+						<li><a href="#fakelink" data-toggle="tooltip" title="completed" data-placement="left">
+							<i class="fa fa-check-circle-o icon-task-sidebar completed"></i>
+							Buying some cigarettes
+							<span class="small-caps">Completed : Jan 15 2014</span>
+						</a></li>
+						
+						<li class="static text-center"><button class="btn btn-success btn-sm">See all tasks</button></li>
+					</ul>
+				  </div><!-- /#task-sidebar -->
+				  <div class="tab-pane fade" id="setting-sidebar">
+					<ul class="sidebar-menu">
+						<li class="static">ACCOUNT SETTING</li>
+						<li class="text-content">
+							<div class="switch">
+								<div class="onoffswitch blank">
+									<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onlinestatus" checked="">
+									<label class="onoffswitch-label" for="onlinestatus">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</div>
+							Online status
+						</li>
+						<li class="text-content">
+							<div class="switch">
+								<div class="onoffswitch blank">
+									<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="offlinecontact" checked="">
+									<label class="onoffswitch-label" for="offlinecontact">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</div>
+							Show offline contact
+						</li>
+						<li class="text-content">
+							<div class="switch">
+								<div class="onoffswitch blank">
+									<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="invisiblemode">
+									<label class="onoffswitch-label" for="invisiblemode">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</div>
+							Invisible mode
+						</li>
+						<li class="text-content">
+							<div class="switch">
+								<div class="onoffswitch blank">
+									<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="personalstatus" checked="">
+									<label class="onoffswitch-label" for="personalstatus">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</div>
+							Show my personal status
+						</li>
+						<li class="text-content">
+							<div class="switch">
+								<div class="onoffswitch blank">
+									<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="deviceicon">
+									<label class="onoffswitch-label" for="deviceicon">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</div>
+							Show my device icon
+						</li>
+						<li class="text-content">
+							<div class="switch">
+								<div class="onoffswitch blank">
+									<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="logmessages">
+									<label class="onoffswitch-label" for="logmessages">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</div>
+							Log all message
+						</li>
+					</ul>
+				  </div><!-- /#setting-sidebar -->
+				</div><!-- /.tab-content -->
+			</div>
+
+
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="col-md-10">
+            {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-2">
+        <img src="//storage.googleapis.com/support-kms-prod/SNP_1DA7588EEB5450EE2A22C2B2F0A6458A61C0_2922342_en_v1" height="auto">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- END CONTENT -->	
+</div>	
+<!-- END CONTAINER -->
+
+<!-- BEGIN FOOTER -->
+<div class="page-footer">
+    <div class="page-footer-inner">
+         2014 &copy; ExamCell by Flat301.
+    </div>
+    <div class="page-footer-tools">
+        <span class="go-top">
+        <i class="fa fa-angle-up"></i>
+        </span>
+    </div>
+</div>
+<!-- END FOOTER -->
+	
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="../../assets/global/plugins/respond.min.js"></script>
+<script src="../../assets/global/plugins/excanvas.min.js"></script> 
+<![endif]-->
+<script src="{% static 'assets/global/plugins/jquery-1.11.0.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="{% static 'assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/jquery-slimscroll/jquery.slimscroll.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/jquery.blockui.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/jquery.cokie.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/uniform/jquery.uniform.min.js' %}" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="{% static 'assets/global/plugins/flot/jquery.flot.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/flot/jquery.flot.resize.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/flot/jquery.flot.categories.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/jquery.pulsate.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/scripts/intro.min.js' %}" type="text/javascript"></script>
+<!-- IMPORTANT! fullcalendar depends on jquery-ui-1.10.3.custom.min.js for drag & drop support -->
+<script src="{% static 'assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/plugins/jquery.sparkline.min.js' %}" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{% static 'assets/global/scripts/metronic.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/admin/layout/scripts/layout.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/admin/pages/scripts/index.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/admin/pages/scripts/tasks.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/global/scripts/custom.js' %}" type="text/javascript"></script>
+ {% block pagejs %}{% endblock %}
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+jQuery(document).ready(function() {    
+   Metronic.init(); // init metronic core componets
+   Layout.init(); // init layout
+   Index.init();   
+   Index.initDashboardDaterange();
+   Index.initCalendar(); // init index page's custom scripts
+   Index.initCharts(); // init index page's custom scripts
+   Index.initChat();
+   Index.initMiniCharts();
+   Index.initIntro();
+   Tasks.initDashboardWidget();
+});
+</script>
+<!-- END JAVASCRIPTS -->
+
 </body>
 </html>

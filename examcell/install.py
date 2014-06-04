@@ -1,3 +1,5 @@
+
+import json,random,urllib2
 from django.contrib.auth.models import User, Group
 from department.models import Subject, Department
 from student.models import Student
@@ -87,17 +89,38 @@ def install_sample_data():
         s.semester = 1 
         s.save()
 
-def add_student(name):
-    student = User()
-    student.username = name
-    student.set_password(name)
-    student.is_staff=False
-    student.is_active=True
-    student.detained = False
-    student.condonation = 0
-    student.save()
-    student_group = Group.objects.get(name='Student')
-    student_group.user_set.add(student)
+def add_student(regId):
+    try:
+        data = json.load(urllib2.urlopen('http://api.randomuser.me/'))
+        print data['results'][0]['user']['name']['first']
+
+    	student.reg_id=models.CharField(max_length=15)
+    	student.first_name=data['results'][0]['user']['name']['first']
+    	student.last_name=data['results'][0]['user']['name']['last']
+    	student.email=data['results'][0]['user']['email']
+    	student.phone_number=data['results'][0]['user']['phone']
+    	student.gender=data['results'][0]['user']['gender']
+    	student.state=data['results'][0]['user']['location']['state']
+    	student.city=data['results'][0]['user']['location']['city']
+    	student.pincode=data['results'][0]['user']['location']['zip']
+    	student.branch=data['results'][0]['user']['location']['state']
+    	student.semester=models.IntegerField(choices=SEMESTER_CHOICES)
+    	student.photo=models.ImageField(upload_to='static/student_photos')
+    	student.sign=models.ImageField(upload_to='static/student_signatures')
+    	student.detained = False
+    	student.condonation = 0
+    except:    
+        student = User()
+        student.username = data['results'][0]['user']['name']['first']
+        student.reg_id = regId
+        student.set_password(name)
+        student.is_staff=False
+        student.is_active=True
+        student.detained = False
+        student.condonation = 0
+        student.save()
+        student_group = Group.objects.get(name='Student')
+        student_group.user_set.add(student)
 
     
 

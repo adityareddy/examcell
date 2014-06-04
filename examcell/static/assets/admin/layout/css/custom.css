@@ -1,0 +1,171 @@
+/* here you can put your own css to customize and override the theme */
+
+.sidebar-right {
+position: fixed;
+top: 106px;
+right: -250px;
+bottom: 0;
+width: 250px;
+background: #313940;
+color: #AAB2BD;
+z-index: 100;
+-webkit-transition: All 0.3s ease;
+-moz-transition: All 0.3s ease;
+-o-transition: All 0.3s ease;
+}
+
+ul.sidebar-menu {
+padding: 0;
+margin: 0 0 30px 0;
+list-style: none;
+}
+ul.sidebar-menu li {
+display: block;
+color: #AAB2BD;
+}
+
+ul.sidebar-menu li.static {
+display: block;
+color: #797E89;
+height: 60px;
+padding: 29px 15px 15px 15px;
+text-decoration: none;
+line-height: 120%;
+position: relative;
+font-size: 13px;
+}
+
+ul.sidebar-menu.online-user li a {
+padding: 10px 20px 10px 60px;
+height: 55px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+ul.sidebar-menu li a {
+display: block;
+color: #AAB2BD;
+height: 45px;
+padding: 12px 20px 12px 50px;
+border-bottom: 1px solid #2C3439;
+text-decoration: none;
+line-height: 120%;
+position: relative;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+ul.sidebar-menu.online-user li a .user-status.success {
+background: #8CC152;
+}
+ul.sidebar-menu.online-user li a .user-status {
+width: 13px;
+height: 13px;
+position: absolute;
+z-index: 2;
+background: #F5F7FA;
+left: 35px;
+top: 7px;
+border-radius: 50%;
+border: 2px solid #313940;
+}
+
+ul.sidebar-menu.online-user li a .ava-sidebar {
+width: 35px;
+height: 35px;
+position: absolute;
+left: 0;
+top: 0;
+text-align: center;
+margin: 10px;
+z-index: 1;
+}
+
+ul.sidebar-menu.online-user li a .device-status {
+position: absolute;
+right: 15px;
+top: 20px;
+color: #656D78;
+font-size: 14px;
+}
+
+ul.sidebar-menu.online-user li a .small-caps {
+font-size: 11px;
+color: #656D78;
+display: block;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+
+.sidebar-right-heading {
+position: fixed;
+top: 46px;
+right: -250px;
+height: 60px;
+background-color: #2C3439;
+width: 250px;
+z-index: 6000;
+-webkit-transition: All 0.3s ease;
+-moz-transition: All 0.3s ease;
+-o-transition: All 0.3s ease;
+}
+
+.sidebar-right-heading .nav-tabs {
+border-bottom: none;
+}
+
+.sidebar-right-heading .nav-tabs.nav-justified > li {
+display: table-cell;
+width: 1%;
+}
+.sidebar-right-heading .nav-tabs > li {
+margin-bottom: 0px;
+}
+
+.sidebar-right-heading .nav-tabs.nav-justified > li > a {
+margin-bottom: 0;
+}
+.nav-tabs.left-position.square > li > a, .nav-tabs.right-position.square > li > a, .nav-tabs.bottom-position.square > li > a, .nav-tabs.square > li > a {
+border-radius: 0;
+}
+.sidebar-right-heading .nav-tabs > li > a {
+margin-right: 0px;
+border: none;
+height: 60px;
+padding: 20px 0;
+color: #656D78;
+}
+.page-header.toggle-left, .page-container.toggle-left {
+left:-250px;
+right: 0;
+}
+
+.sidebar-right-heading.toggle-left, .sidebar-right.toggle-left {
+right: 0;
+}
+
+.sidebar-right-heading .nav-tabs > li.active > a, .sidebar-right-heading .nav-tabs > li.active > a:hover, .sidebar-right-heading .nav-tabs > li.active > a:focus {
+color: #E6E9ED;
+cursor: default;
+border: none;
+background-color: #242C2E;
+}
+
+
+.page-header,.page-container,.page-content{
+    -webkit-transition: All 0.3s ease;
+-moz-transition: All 0.3s ease;
+-o-transition: All 0.3s ease;
+}
+.page-sidebar{
+    width:170px;
+}
+@media (min-width: 992px) {
+
+  .page-content-wrapper .page-content {
+    margin-left: 170px;
+  }
+}
